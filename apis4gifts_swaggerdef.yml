@@ -1,0 +1,475 @@
+swagger: "2.0"
+info:
+  description: "This project provides a platform to interact via REST APIs with Oracle Autonomous Transaction Procesing Database (ATP) to create and redeem gifts and crosswords."
+  version: "2.1.0"
+  title: "APIs 4 Gifts Demo"
+  #termsOfService: "http://apismadeeasy.cloud/terms"
+  contact:
+    email: "carlos.rodriguez.iturria@oracle.com"
+  #license:
+  #  name: "Apache 2.0"
+  #  url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+basePath: "/"
+host: "localhost:3000"
+#basePath: "/nf/gifts"
+#host: "apipdev.oracleau.cloud"
+tags:
+- name: "Gifts"
+  description: "GPS and other type of Gifts to interact with via mobile application."
+  externalDocs:
+    description: "Find out more"
+    url: "http://apismadeeasy.cloud"
+- name: "Crosswords"
+  description: " Crosswords to be Redemption via mobile application."
+  externalDocs:
+    description: "Find out more"
+    url: "http://apismadeeasy.cloud"
+schemes:
+#- "https"
+- "http"
+security:
+  - X-MyAPI-Key: []
+paths:
+  /gifts/gps:
+    get:
+      tags:
+      - "Gifts"
+      summary: "Finds all available GPS Gifts."
+      description: "Gets all GPS Gifts"
+      operationId: "getGPSGifts"
+      produces: 
+        - "application/json"
+      parameters:
+      - name: "gpsGiftId"
+        in: "query"
+        description: "Field name used to filter the record to be returned."
+        required: false
+        type: "string"
+        x-example: '12345678ABCDEF'
+      responses:
+        200:
+          description: "Returns the full list of GPSGifts."
+          schema:
+            properties:
+              GPSGifts:
+                type: "array"
+                items:
+                  $ref: "#/definitions/GPSGiftsResponse"
+    post:
+      tags:
+      - "Gifts"
+      summary: "Creates new GPS Gifts."
+      description: "Returns the just inserted record(s)."
+      operationId: "postGpsGifts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Array of GPS Gift(s) that need to be added."
+        required: true
+        schema:
+            properties:
+              GPSGifts:
+                type: "array"
+                items:
+                  $ref: "#/definitions/GPSGiftsRequest"
+      responses:
+        200:
+          description: "Returns the just created record(s)."
+          schema:
+            properties:
+              GPSGifts:
+                type: "array"
+                items:
+                  $ref: '#/definitions/GPSGiftsResponse'
+
+  /gifts/gps/redeem:
+    get:
+      tags:
+      - "Gifts"
+      summary: "Finds all available Redemptions for GPS Gifts"
+      description: "Gets all Redemptions for GPS Gifts"
+      operationId: "getRedemptionGPSGifts"
+      produces: 
+        - "application/json"
+      parameters:
+      - name: "gpsGiftId"
+        in: "query"
+        description: "Field name used to filter the record to be returned."
+        required: false
+        type: "string"
+        x-example: '12345678ABCDEF'
+      responses:
+        200:
+          description: "Returns the full list of GPSGifts."
+          schema:
+            properties:
+              RedemptionGPSGifts:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RedemptionGPSGiftsResponse"
+    post:
+      tags:
+      - "Gifts"
+      summary: "Creates new Redemption GPS Gifts."
+      description: "Returns the just inserted record(s)."
+      operationId: "postRedemptionGpsGifts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Array of Redemption GPS Gift(s) that need to be added."
+        required: true
+        schema:
+            properties:
+              RedemptionGPSGifts:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RedemptionGPSGiftsRequest"
+      responses:
+        200:
+          description: "Returns the just created record(s)."
+          schema:
+            properties:
+              RedemptionGPSGifts:
+                type: "array"
+                items:
+                  $ref: '#/definitions/RedemptionGPSGiftsResponse'
+
+
+  /gifts/redeem:
+    get:
+      tags:
+      - "Gifts"
+      summary: "Finds all Redemption available non-GPS Gifts"
+      description: "Gets all Redemption available non-GPS Gifts"
+      operationId: "getRedemptionGifts"
+      produces: 
+        - "application/json"
+      parameters:
+      - name: "giftId"
+        in: "query"
+        description: "Field name used to filter the record to be returned."
+        required: false
+        type: "string"
+        x-example: '12345678ABCDEF'
+      responses:
+        200:
+          description: "Returns the full list of Gifts."
+          schema:
+            properties:
+              RedemptionGifts:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RedemptionGiftsResponse"
+    post:
+      tags:
+      - "Gifts"
+      summary: "Creates new Redemption non-GPS Gifts."
+      description: "Returns the just inserted record(s)."
+      operationId: "postRedemptionGifts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Array of Redemption non-GPS Gift(s) that need to be added."
+        required: true
+        schema:
+            properties:
+              RedemptionGifts:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RedemptionGiftsRequest"
+      responses:
+        200:
+          description: "Returns the just created record(s)."
+          schema:
+            properties:
+              RedemptionGifts:
+                type: "array"
+                items:
+                  $ref: '#/definitions/RedemptionGiftsResponse'
+                  
+  /crosswords/redeem:
+    get:
+      tags:
+      - "Crosswords"
+      summary: "Finds all Redemption available Crosswords"
+      description: "Gets all Redemption available Crosswords"
+      operationId: "getCrosswords"
+      produces: 
+        - "application/json"
+      parameters:
+      - name: "giftId"
+        in: "query"
+        description: "Field name used to filter the record to be returned."
+        required: false
+        type: "string"
+        x-example: '12345678ABCDEF'
+      responses:
+        200:
+          description: "Returns the full list of Gifts."
+          schema:
+            properties:
+              RedemptionCrosswords:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RedemptionCrosswordsResponse"
+    post:
+      tags:
+      - "Crosswords"
+      summary: "Creates new Redemption Crosswords."
+      description: "Returns the just inserted record(s)."
+      operationId: "postCrosswords"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Array of Redemption Crosswords that need to be added."
+        required: true
+        schema:
+            properties:
+              RedemptionCrosswords:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RedemptionCrosswordsRequest"
+      responses:
+        200:
+          description: "Returns the just created record(s)."
+          schema:
+            properties:
+              RedemptionCrosswords:
+                type: "array"
+                items:
+                  $ref: "#/definitions/RedemptionCrosswordsResponse"
+
+
+securityDefinitions:
+  X-MyAPI-Key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
+definitions:
+  RedemptionGiftsRequest:
+    type: "object"
+    required:
+    - "GameSourceId"
+    - "GameSource"
+    - "DateTime"
+    - "MemberId"
+    - "RedemptionStatus"
+    properties:
+      GameSourceId:
+        type: "string"
+        example: "12345678abcdef"
+      GameSource:
+        type: "string"
+        example: "12345678abcdef"
+      DateTime:
+        type: "string"
+        example: "2018-09-03T15:00:00"
+      MemberId:
+        type: "string"
+        example: "12345"
+      RedemptionStatus:
+        type: "string"
+        example: "Redemption"
+
+  RedemptionGiftsResponse:
+    type: "object"
+    required:
+    - "GameSourceId"
+    - "GameSource"
+    - "DateTime"
+    - "MemberId"
+    - "RedemptionStatus"
+    properties:
+      GameSourceId:
+        type: "string"
+        example: "12345678abcdef"
+      GameSource:
+        type: "string"
+        example: "12345678abcdef"
+      DateTime:
+        type: "string"
+        example: "2018-09-03T15:00:00"
+      MemberId:
+        type: "string"
+        example: "12345"
+      RedemptionStatus:
+        type: "string"
+        example: "Redemption"
+        
+  GPSGiftsRequest:
+    type: "object"
+    required:
+    - "GPSGiftId"
+    - "Lat"
+    - "Long"
+    - "Altitude"
+    - "ImageURL"
+    - "RedemptionAction"
+    properties:
+      GPSGiftId:
+        type: "string"
+        example: "12345678abcdef"
+      Lat:
+        type: "string"
+        example: "-37.835311"
+      Long:
+        type: "string"
+        example: "144.9725336"
+      Altitude:
+        type: "string"
+        example: "31"
+      ImageURL:
+        type: "string"
+        example: "https://i.4pcdn.org/x/1508011708146.png"
+      RedemptionAction:
+        type: "string"
+        example: "Active"
+
+  GPSGiftsResponse:
+    type: "object"
+    required:
+    - "GPSGiftId"
+    - "Lat"
+    - "Long"
+    - "Altitude"
+    - "ImageURL"
+    - "RedemptionAction"
+    properties:
+      GPSGiftId:
+        type: "string"
+        example: "12345678abcdef"
+      Lat:
+        type: "string"
+        example: "-37.835311"
+      Long:
+        type: "string"
+        example: "144.9725336"
+      Altitude:
+        type: "string"
+        example: "31"
+      ImageURL:
+        type: "string"
+        example: "https://i.4pcdn.org/x/1508011708146.png"
+      RedemptionAction:
+        type: "string"
+        example: "Active"
+        
+  RedemptionGPSGiftsRequest:
+    type: "object"
+    required:
+    - "DeviceId"
+    - "GPSGiftId"
+    - "DateTime"
+    - "RedemptionStatus"
+    properties:
+      DeviceId:
+        type: "string"
+        example: "12345678abcdef"
+      GPSGiftId:
+        type: "string"
+        example: "12345678abcdef"
+      DateTime:
+        type: "string"
+        example: "2018-09-03T15:10:00"
+      RedemptionStatus:
+        type: "string"
+        example: "Redemption"
+
+  RedemptionGPSGiftsResponse:
+    type: "object"
+    required:
+    - "DeviceId"
+    - "GPSGiftId"
+    - "DateTime"
+    - "RedemptionStatus"
+    properties:
+      DeviceId:
+        type: "string"
+        example: "12345678abcdef"
+      GPSGiftId:
+        type: "string"
+        example: "12345678abcdef"
+      DateTime:
+        type: "string"
+        example: "2018-09-03T15:10:00"
+      RedemptionStatus:
+        type: "string"
+        example: "Redemption"      
+        
+  RedemptionCrosswordsRequest:
+    type: "object"
+    required:
+    - "DeviceId"
+    - "CrosswordId"
+    - "EventDateTime"
+    - "EventType"
+    - "EngagementCount"
+    - "RedemptionStatus"
+    properties:
+      DeviceId:
+        type: "string"
+        example: "12345678abcdef"
+      CrosswordId:
+        type: "string"
+        example: "12345678abcdef"
+      EventDateTime:
+        type: "string"
+        example: "2018-09-03T15:10:00"
+      EventType:
+        type: "string"
+        example: "start"
+      EngagementCount:
+        type: "number"
+        example: 45
+      RedemptionStatus:
+        type: "string"
+        example: "Redemption"
+
+  RedemptionCrosswordsResponse:
+    type: "object"
+    required:
+    - "DeviceId"
+    - "CrosswordId"
+    - "EventDateTime"
+    - "EventType"
+    - "EngagementCount"
+    - "RedemptionStatus"
+    properties:
+      DeviceId:
+        type: "string"
+        example: "12345678abcdef"
+      CrosswordId:
+        type: "string"
+        example: "12345678abcdef"
+      EventDateTime:
+        type: "string"
+        example: "2018-09-03T15:10:00"
+      EventType:
+        type: "string"
+        example: "start"
+      EngagementCount:
+        type: "number"
+        example: 45
+      RedemptionStatus:
+        type: "string"
+        example: "Redemption"            
+            
+externalDocs:
+  description: "Find out more about our APIs"
+  url: "http://apisMadeEasy.cloud"

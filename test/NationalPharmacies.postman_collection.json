@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "ba6d7dd0-8001-4392-a923-f7d7398c2446",
+		"name": "NationalPharmacies",
+		"description": "National Pharmacies APIs for Gifts, GSP Gifts and Crosswords",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Mock GET gifts/gps",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://private-91a7c2-apis4gifts.apiary-mock.com/gifts/gps",
+					"protocol": "http",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"gifts",
+						"gps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock POST gifts/gps",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"GPSGifts\": [\r\n    {\r\n      \"GPSGiftId\": \"12345678abcdef\",\r\n      \"Lat\": \"-37.835311\",\r\n      \"Long\": \"144.9725336\",\r\n      \"Altitude\": \"31\",\r\n      \"ImageURL\": \"https://i.4pcdn.org/x/1508011708146.png\",\r\n      \"RedemptionAction\": \"Active\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "http://private-91a7c2-apis4gifts.apiary-mock.com/gifts/gps",
+					"protocol": "http",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"gifts",
+						"gps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock GET gifts/gps/redeem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://private-91a7c2-apis4gifts.apiary-mock.com/gifts/gps/redeem",
+					"protocol": "https",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"gifts",
+						"gps",
+						"redeem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock POST gifts/gps/redeem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"RedemptionGPSGifts\": [\r\n    {\r\n      \"DeviceId\": \"12345678abcdef\",\r\n      \"GPSGiftId\": \"12345678abcdef\",\r\n      \"DateTime\": \"2018-09-03T15:10:00\",\r\n      \"RedemptionStatus\": \"Redemption\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://private-91a7c2-apis4gifts.apiary-mock.com/gifts/gps/redeem",
+					"protocol": "https",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"gifts",
+						"gps",
+						"redeem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock GET gifts/redeem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://private-91a7c2-apis4gifts.apiary-mock.com/gifts/redeem",
+					"protocol": "https",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"gifts",
+						"redeem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock POST gifts/redeem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"RedemptionGifts\": [\r\n    {\r\n      \"GameSourceId\": \"12345678abcdef\",\r\n      \"GameSource\": \"12345678abcdef\",\r\n      \"DateTime\": \"2018-09-03T15:00:00\",\r\n      \"MemberId\": \"12345\",\r\n      \"RedemptionStatus\": \"Redemption\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://private-91a7c2-apis4gifts.apiary-mock.com/gifts/redeem",
+					"protocol": "https",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"gifts",
+						"redeem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock GET crosswords/redeem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://private-91a7c2-apis4gifts.apiary-mock.com/crosswords/redeem",
+					"protocol": "https",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"crosswords",
+						"redeem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mock POST crosswords/redeem",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"RedemptionCrosswords\": [\r\n    {\r\n      \"DeviceId\": \"12345678abcdef\",\r\n      \"CrosswordId\": \"12345678abcdef\",\r\n      \"EventDateTime\": \"2018-09-03T15:10:00\",\r\n      \"EventType\": \"start\",\r\n      \"EngagementCount\": 45,\r\n      \"RedemptionStatus\": \"Redemption\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://private-91a7c2-apis4gifts.apiary-mock.com/crosswords/redeem",
+					"protocol": "https",
+					"host": [
+						"private-91a7c2-apis4gifts",
+						"apiary-mock",
+						"com"
+					],
+					"path": [
+						"crosswords",
+						"redeem"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
