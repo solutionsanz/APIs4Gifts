@@ -1,4 +1,5 @@
 module.exports = function(app) {  
   // here we list our individual sets of routes to use
-  require('./routes/orders')(app);
+  require('./routes/gifts')(app);
+  require('./routes/crosswords')(app);
 };

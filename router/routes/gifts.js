@@ -25,21 +25,21 @@ module.exports = function (app) {
     }
 
     /**
-     * Adding MongoDB APIs:
+     * Adding APIs:
      * 
      */
 
     /* GET Records */
-    app.get('/orders', function (req, res) {
+    app.get('/gifts/gps', function (req, res) {
 
-        var orderId = req.query.orderId; //Contact Id to filter by.        
+        var orderId = req.query.gpsGiftId; //gpsGiftId to filter by (if given)
 
-        log("GET", "/orders", "Order Id received [" + orderId + "]");
+        log("GET", "/gifts/gps", "gpsGiftId received [" + orderId + "]");
 
-        funct.getOrders(orderId, function (resMetadata, resOrders) {
+        funct.getGiftGps(orderId, function (resMetadata, resData) {
 
-            log("GET", "/orders", "Found: [" + JSON.stringify({
-                resOrders
+            log("GET", "/gifts/gps", "Found: [" + JSON.stringify({
+                resData
             }) + "]");
 
             // In order to comply with the API documentation, 
@@ -48,52 +48,54 @@ module.exports = function (app) {
             // Otherwise we will create an array of 1 element
             // in the response.
             var result = [];
-            var order = {};
-            if (resMetadata != null && resMetadata != undefined && resOrders != null && resOrders != undefined) {
+            var renderedResult = {};
+            if (resMetadata != null && resMetadata != undefined && resData != null && resData != undefined) {
 
-                for (var x in resOrders) {
+                for (var x in resData) {
 
                     // Starting new order:
-                    order = {};
-                    for (var y in resOrders[x]) {
+                    renderedResult = {};
+                    for (var y in resData[x]) {
 
 
                         col = resMetadata[y].name.toLowerCase();
-                        colValue = resOrders[x][y];
-                        order[col] = colValue;
+                        colValue = resData[x][y];
+                        renderedResult[col] = colValue;
 
                         console.log("col is [" + col + "], colValue is [" + colValue + "]");
                     }
                     // Adding full order to array:
-                    console.log("order is [" + JSON.stringify(order) + ']');
-                    result.push(order);
+                    console.log("order is [" + JSON.stringify(renderedResult) + ']');
+                    result.push(renderedResult);
                 }
 
             }
 
             // Returning result
-            res.send(result);
+            res.send({
+                "GPSGifts": result
+            });
         });
     });
 
     /* POST records */
-    app.post('/orders', function (req, res) {
+    app.post('/gifts/gps', function (req, res) {
 
         // // Retrieve Records to be inserted from Body:
-        var orders = req.body.Orders;
+        var gpsGifts = req.body.GPSGifts;
 
-        if (orders == null || orders == undefined) {
-            log("POST", "/orders", "No Orders received... Please verify and try again.");
-            res.status(400).end("No Orders received... Please verify and try again."); //Bad request...
+        if (gpsGifts == null || gpsGifts == undefined) {
+            log("POST", "/gifts/gps", "No data received... Please verify and try again.");
+            res.status(400).end("No data received... Please verify and try again."); //Bad request...
             return;
         }
 
 
-        funct.insertOrders(orders, function () {
+        funct.insertGpsGifts(gpsGifts, function () {
 
-            // Echoing result... node-oradb dows not return the id, so let's temporarily return the incoming list of orders
+            // Echoing result... node-oradb does not return the id, so let's temporarily return the incoming list of orders
             res.send({
-                "Orders": orders
+                "GPSGifts": gpsGifts
             });
         });
     });

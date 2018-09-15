@@ -315,58 +315,62 @@ definitions:
   GPSGiftsRequest:
     type: "object"
     required:
-    - "GPSGiftId"
-    - "Lat"
-    - "Long"
-    - "Altitude"
-    - "ImageURL"
-    - "RedemptionAction"
+    - "id"
+    - "gpsgiftid"
+    - "latitude"
+    - "longtitude"
+    - "altitude"
+    - "imageurl"
+    - "redemptionaction"
     properties:
-      GPSGiftId:
+      gpsgiftid:
         type: "string"
         example: "12345678abcdef"
-      Lat:
-        type: "string"
-        example: "-37.835311"
-      Long:
-        type: "string"
-        example: "144.9725336"
-      Altitude:
-        type: "string"
-        example: "31"
-      ImageURL:
+      latitude:
+        type: "number"
+        example: -37.835311
+      longtitude:
+        type: "number"
+        example: 144.9725336
+      altitude:
+        type: "number"
+        example: 31
+      imageurl:
         type: "string"
         example: "https://i.4pcdn.org/x/1508011708146.png"
-      RedemptionAction:
+      redemptionaction:
         type: "string"
         example: "Active"
 
   GPSGiftsResponse:
     type: "object"
     required:
-    - "GPSGiftId"
-    - "Lat"
-    - "Long"
-    - "Altitude"
-    - "ImageURL"
-    - "RedemptionAction"
+    - "gpsgiftid"
+    - "latitude"
+    - "longtitude"
+    - "altitude"
+    - "imageurl"
+    - "redemptionaction"
     properties:
-      GPSGiftId:
+      id:
         type: "string"
         example: "12345678abcdef"
-      Lat:
+      gpsgiftid:
         type: "string"
-        example: "-37.835311"
-      Long:
-        type: "string"
-        example: "144.9725336"
-      Altitude:
-        type: "string"
-        example: "31"
-      ImageURL:
+        example: "12345678abcdef"
+      latitude:
+        type: "number"
+        example: -37.835311
+      longtitude:
+        type: "number"
+        example: 144.9725336
+      altitude:
+        type: "number"
+        example: 31
+      imageurl:
         type: "string"
         example: "https://i.4pcdn.org/x/1508011708146.png"
-      RedemptionAction:
+      redemptionaction:
         type: "string"
         example: "Active"
         
