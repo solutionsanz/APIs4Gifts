@@ -265,57 +265,60 @@ definitions:
   RedemptionGiftsRequest:
     type: "object"
     required:
-    - "GameSourceId"
-    - "GameSource"
-    - "DateTime"
-    - "MemberId"
-    - "RedemptionStatus"
+    - "gamesourceid"
+    - "gamegource"
+    - "datetime"
+    - "memberid"
+    - "redemptionstatus"
     properties:
-      GameSourceId:
+      gamegourceid:
         type: "string"
         example: "12345678abcdef"
-      GameSource:
+      gamesource:
         type: "string"
         example: "12345678abcdef"
-      DateTime:
+      datetime:
         type: "string"
         example: "2018-09-03T15:00:00"
-      MemberId:
+      memberid:
         type: "string"
         example: "12345"
-      RedemptionStatus:
+      redemptionstatus:
         type: "string"
         example: "Redemption"
 
   RedemptionGiftsResponse:
     type: "object"
     required:
-    - "GameSourceId"
-    - "GameSource"
-    - "DateTime"
-    - "MemberId"
-    - "RedemptionStatus"
+    - "id"
+    - "gamesourceid"
+    - "gamesource"
+    - "datetime"
+    - "memberid"
+    - "redemptionstatus"
     properties:
-      GameSourceId:
+      id:
         type: "string"
         example: "12345678abcdef"
-      GameSource:
+      gamesourceid:
         type: "string"
         example: "12345678abcdef"
-      DateTime:
+      gamesource:
+        type: "string"
+        example: "12345678abcdef"
+      datetime:
         type: "string"
         example: "2018-09-03T15:00:00"
-      MemberId:
+      memberid:
         type: "string"
         example: "12345"
-      RedemptionStatus:
+      redemptionstatus:
         type: "string"
         example: "Redemption"
         
   GPSGiftsRequest:
     type: "object"
     required:
-    - "id"
     - "gpsgiftid"
     - "latitude"
     - "longtitude"
@@ -328,13 +331,13 @@ definitions:
         example: "12345678abcdef"
       latitude:
         type: "number"
-        example: -37.835311
+        example: "-37.835311"
       longtitude:
         type: "number"
-        example: 144.9725336
+        example: "144.9725336"
       altitude:
         type: "number"
-        example: 31
+        example: "31"
       imageurl:
         type: "string"
         example: "https://i.4pcdn.org/x/1508011708146.png"
@@ -345,6 +348,7 @@ definitions:
   GPSGiftsResponse:
     type: "object"
     required:
+    - "id"
     - "gpsgiftid"
     - "latitude"
     - "longtitude"
@@ -360,13 +364,13 @@ definitions:
         example: "12345678abcdef"
       latitude:
         type: "number"
-        example: -37.835311
+        example: "-37.835311"
       longtitude:
         type: "number"
-        example: 144.9725336
+        example: "144.9725336"
       altitude:
         type: "number"
-        example: 31
+        example: "31"
       imageurl:
         type: "string"
         example: "https://i.4pcdn.org/x/1508011708146.png"
@@ -377,100 +381,105 @@ definitions:
   RedemptionGPSGiftsRequest:
     type: "object"
     required:
-    - "DeviceId"
-    - "GPSGiftId"
-    - "DateTime"
-    - "RedemptionStatus"
+    - "deviceid"
+    - "gpsgiftid"
+    - "datetime"
+    - "redeemedstatus"
     properties:
-      DeviceId:
+      deviceid:
         type: "string"
         example: "12345678abcdef"
-      GPSGiftId:
+      gpsgiftid:
         type: "string"
         example: "12345678abcdef"
-      DateTime:
+      datetime:
         type: "string"
         example: "2018-09-03T15:10:00"
-      RedemptionStatus:
+      redeemedstatus:
         type: "string"
         example: "Redemption"
 
   RedemptionGPSGiftsResponse:
     type: "object"
     required:
-    - "DeviceId"
-    - "GPSGiftId"
-    - "DateTime"
-    - "RedemptionStatus"
+    - "id"
+    - "deviceid"
+    - "gpsgiftid"
+    - "datetime"
+    - "redeemedstatus"
     properties:
-      DeviceId:
+      id:
         type: "string"
         example: "12345678abcdef"
-      GPSGiftId:
+      deviceid:
         type: "string"
         example: "12345678abcdef"
-      DateTime:
+      gpsgiftid:
+        type: "string"
+        example: "12345678abcdef"
+      datetime:
         type: "string"
         example: "2018-09-03T15:10:00"
-      RedemptionStatus:
+      redeemedstatus:
         type: "string"
         example: "Redemption"      
         
   RedemptionCrosswordsRequest:
     type: "object"
     required:
-    - "DeviceId"
-    - "CrosswordId"
-    - "EventDateTime"
-    - "EventType"
-    - "EngagementCount"
-    - "RedemptionStatus"
+    - "deviceid"
+    - "crosswordid"
+    - "eventdatetime"
+    - "eventtype"
+    - "engagementcount"
+    - "redemptionstatus"
     properties:
-      DeviceId:
+      deviceid:
         type: "string"
         example: "12345678abcdef"
-      CrosswordId:
+      crosswordid:
         type: "string"
         example: "12345678abcdef"
-      EventDateTime:
+      eventdatetime:
         type: "string"
         example: "2018-09-03T15:10:00"
-      EventType:
+      eventtype:
         type: "string"
         example: "start"
-      EngagementCount:
+      engagementcount:
         type: "number"
         example: 45
-      RedemptionStatus:
+      redemptionstatus:
         type: "string"
         example: "Redemption"
 
   RedemptionCrosswordsResponse:
     type: "object"
     required:
-    - "DeviceId"
-    - "CrosswordId"
-    - "EventDateTime"
-    - "EventType"
-    - "EngagementCount"
-    - "RedemptionStatus"
+    - "id"
+    - "deviceid"
+    - "crosswordid"
+    - "eventdatetime"
+    - "eventtype"
+    - "engagementcount"
+    - "redemptionstatus"
     properties:
-      DeviceId:
+      id:
         type: "string"
         example: "12345678abcdef"
-      CrosswordId:
+      crosswordid:
         type: "string"
         example: "12345678abcdef"
-      EventDateTime:
+      eventdatetime:
         type: "string"
         example: "2018-09-03T15:10:00"
-      EventType:
+      eventtype:
         type: "string"
         example: "start"
-      EngagementCount:
+      engagementcount:
         type: "number"
         example: 45
-      RedemptionStatus:
+      redemptionstatus:
         type: "string"
         example: "Redemption"            
             

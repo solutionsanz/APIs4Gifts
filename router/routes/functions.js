@@ -64,6 +64,56 @@ exports.insertGpsGifts = function (gpsGifts, callback) {
 	insertData(query, params, callback);
 };
 
+exports.getGiftGpsRedeem = function (id, callback) {
+
+	var query;
+	var params;
+	if (id != null && id != undefined) {
+		query = `SELECT ID, DeviceID, GPSGiftID, DateTime, RedeemedStatus
+		FROM Redemption_GPS_Gifts
+		WHERE ID = :id`;
+
+		params = [id];
+
+	} else {
+		query = `SELECT ID, DeviceID, GPSGiftID, DateTime, RedeemedStatus
+		FROM Redemption_GPS_Gifts`;
+
+		params = [];
+	}
+
+	console.log("Inside getGiftGpsRedeem, before establishing connection. Query is [" + query + "], id is [" + id + "]");
+
+	getData(query, params, callback);
+};
+
+exports.insertGpsGiftsRedeem = function (gpsGifts, callback) {
+
+
+	var strQuery = " INTO Redemption_GPS_Gifts (DeviceID, GPSGiftID, DateTime, RedeemedStatus)";
+	strQuery += " VALUES (:DeviceID, :GPSGiftID, :DateTime, :RedeemedStatus) ";
+
+	var query = "INSERT ALL";
+	var params = [];
+
+	for (var x in gpsGifts) {
+
+		query = query + strQuery;
+
+		query = query.replace(/:DeviceID/g, "'" + gpsGifts[x].deviceid + "'");
+		query = query.replace(/:GPSGiftID/g, "'" + gpsGifts[x].gpsgiftid + "'");
+		query = query.replace(/:DateTime/g, "'" + gpsGifts[x].datetime + "'");
+		query = query.replace(/:RedeemedStatus/g, "'" + gpsGifts[x].redeemedstatus + "'");
+	}
+
+	query += "SELECT * FROM DUAL";
+
+	console.log("GPSGifts length is [" + gpsGifts.length + "]");
+	console.log("concatenated query to execute is [" + query + "]");
+
+	insertData(query, params, callback);
+};
+
 function getData(query, params, callback) {
 
 	// Get a non-pooled connection

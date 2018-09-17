@@ -29,7 +29,7 @@ module.exports = function (app) {
      * 
      */
 
-    /* GET Records */
+    /* GET /gifts/gps */
     app.get('/gifts/gps', function (req, res) {
 
         var orderId = req.query.gpsGiftId; //gpsGiftId to filter by (if given)
@@ -78,7 +78,7 @@ module.exports = function (app) {
         });
     });
 
-    /* POST records */
+    /* POST /gifts/gps */
     app.post('/gifts/gps', function (req, res) {
 
         // // Retrieve Records to be inserted from Body:
@@ -99,6 +99,80 @@ module.exports = function (app) {
             });
         });
     });
+
+
+
+    /* GET /gifts/gps/redeem */
+    app.get('/gifts/gps/redeem', function (req, res) {
+
+        var orderId = req.query.gpsGiftId; //gpsGiftId to filter by (if given)
+
+        log("GET", "/gifts/gps/redeem", "gpsGiftId received [" + orderId + "]");
+
+        funct.getGiftGpsRedeem(orderId, function (resMetadata, resData) {
+
+            log("GET", "/gifts/gps/redeem", "Found: [" + JSON.stringify({
+                resData
+            }) + "]");
+
+            // In order to comply with the API documentation, 
+            // let's validate if an Array was return, in which
+            // case we simply return it.
+            // Otherwise we will create an array of 1 element
+            // in the response.
+            var result = [];
+            var renderedResult = {};
+            if (resMetadata != null && resMetadata != undefined && resData != null && resData != undefined) {
+
+                for (var x in resData) {
+
+                    // Starting new order:
+                    renderedResult = {};
+                    for (var y in resData[x]) {
+
+
+                        col = resMetadata[y].name.toLowerCase();
+                        colValue = resData[x][y];
+                        renderedResult[col] = colValue;
+
+                        console.log("col is [" + col + "], colValue is [" + colValue + "]");
+                    }
+                    // Adding full order to array:
+                    console.log("order is [" + JSON.stringify(renderedResult) + ']');
+                    result.push(renderedResult);
+                }
+
+            }
+
+            // Returning result
+            res.send({
+                "GPSGifts": result
+            });
+        });
+    });
+
+    /* POST /gifts/gps/redeem */
+    app.post('/gifts/gps/redeem', function (req, res) {
+
+        // // Retrieve Records to be inserted from Body:
+        var gpsGifts = req.body.GPSGifts;
+
+        if (gpsGifts == null || gpsGifts == undefined) {
+            log("POST", "/gifts/gps/redeem", "No data received... Please verify and try again.");
+            res.status(400).end("No data received... Please verify and try again."); //Bad request...
+            return;
+        }
+
+
+        funct.insertGpsGiftsRedeem(gpsGifts, function () {
+
+            // Echoing result... node-oradb does not return the id, so let's temporarily return the incoming list of orders
+            res.send({
+                "GPSGifts": gpsGifts
+            });
+        });
+    });
+
 
     /* PUT Order status */
     // app.put('/orders/:id/status', function (req, res) {
