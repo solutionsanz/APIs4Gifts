@@ -53,7 +53,7 @@ Containerise APIs 4 Gifts Application
 
             docker run --env-file setEnv -p 3000:3000 -it [image_id] 
 
-                Note, if you are unsure about the actual **image_id**, you can use **docker images** to gather all images being generated.
+                Note, if you are unsure about the actual "image_id", you can use "docker images" to gather all images being generated.
 
                 Also note that by default port 3000 was configured as a "Port Forward" by vagrant as part of your VM bootstrap during its creation.
 
