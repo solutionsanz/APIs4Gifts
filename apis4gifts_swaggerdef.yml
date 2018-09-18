@@ -209,7 +209,7 @@ paths:
       produces: 
         - "application/json"
       parameters:
-      - name: "giftId"
+      - name: "crosswordId"
         in: "query"
         description: "Field name used to filter the record to be returned."
         required: false

@@ -114,6 +114,111 @@ exports.insertGpsGiftsRedeem = function (gpsGifts, callback) {
 	insertData(query, params, callback);
 };
 
+exports.getGiftsRedeem = function (id, callback) {
+
+	var query;
+	var params;
+	if (id != null && id != undefined) {
+		query = `SELECT ID, GameSourceID, GameSource, DateTime, MemberID, RedeemedStatus
+		FROM Redemption_Gifts
+		WHERE ID = :id`;
+
+		params = [id];
+
+	} else {
+		query = `SELECT ID, GameSourceID, GameSource, DateTime, MemberID, RedeemedStatus
+		FROM Redemption_Gifts`;
+
+		params = [];
+	}
+
+	console.log("Inside getGiftsRedeem, before establishing connection. Query is [" + query + "], id is [" + id + "]");
+
+	getData(query, params, callback);
+};
+
+exports.insertGiftsRedeem = function (gifts, callback) {
+
+
+	var strQuery = " INTO Redemption_GPS_Gifts (GameSourceID, GameSource, DateTime, MemberID, RedeemedStatus)";
+	strQuery += " VALUES (:GameSourceID, :GameSource, :DateTime, :MemberID, :RedeemedStatus) ";
+
+	var query = "INSERT ALL";
+	var params = [];
+
+	for (var x in gifts) {
+
+		query = query + strQuery;
+
+		query = query.replace(/:GameSourceID/g, "'" + gifts[x].gamesourceid + "'");
+		query = query.replace(/:GameSource/g, "'" + gifts[x].gamesource + "'");
+		query = query.replace(/:DateTime/g, "'" + gifts[x].datetime + "'");
+		query = query.replace(/:MemberID/g, "'" + gifts[x].memberid + "'");
+		query = query.replace(/:RedeemedStatus/g, "'" + gifts[x].redemptionstatus + "'");
+	}
+
+	query += "SELECT * FROM DUAL";
+
+	console.log("Redeemed Gifts length is [" + gifts.length + "]");
+	console.log("concatenated query to execute is [" + query + "]");
+
+	insertData(query, params, callback);
+};
+
+exports.getCrosswordRedeem = function (id, callback) {
+
+	var query;
+	var params;
+	if (id != null && id != undefined) {
+		query = `SELECT ID, DeviceID, CrosswordID, EventDateTime, EventType, EngagementCount, RedeemedStatus
+		FROM Redemption_Crosswords
+		WHERE ID = :id`;
+
+		params = [id];
+
+	} else {
+		query = `SELECT ID, DeviceID, CrosswordID, EventDateTime, EventType, EngagementCount, RedeemedStatus
+		FROM Redemption_Crosswords`;
+
+		params = [];
+	}
+
+	console.log("Inside getGiftsRedeem, before establishing connection. Query is [" + query + "], id is [" + id + "]");
+
+	getData(query, params, callback);
+};
+
+exports.insertCrosswordsRedeem = function (crosswords, callback) {
+
+
+	var strQuery = " INTO Redemption_Crosswords (DeviceID, CrosswordID, EventDateTime, EventType, EngagementCount, RedeemedStatus)";
+	strQuery += " VALUES (:DeviceID, :CrosswordID, :EventDateTime, :EventType, :EngagementCount, :RedeemedStatus) ";
+
+	var query = "INSERT ALL";
+	var params = [];
+
+	for (var x in crosswords) {
+
+		query = query + strQuery;
+
+		query = query.replace(/:DeviceID/g, "'" + crosswords[x].deviceid + "'");
+		query = query.replace(/:CrosswordID/g, "'" + crosswords[x].crosswordid + "'");
+		query = query.replace(/:EventDateTime/g, "'" + crosswords[x].eventdatetime + "'");
+		query = query.replace(/:EventType/g, "'" + crosswords[x].eventtype + "'");
+		query = query.replace(/:EngagementCount/g, "'" + crosswords[x].engagementcount + "'");
+		query = query.replace(/:RedeemedStatus/g, "'" + crosswords[x].redemptionstatus + "'");
+	}
+
+	query += "SELECT * FROM DUAL";
+
+	console.log("Redeemed Crosswords length is [" + crosswords.length + "]");
+	console.log("concatenated query to execute is [" + query + "]");
+
+	insertData(query, params, callback);
+};
+
+
+
 function getData(query, params, callback) {
 
 	// Get a non-pooled connection
