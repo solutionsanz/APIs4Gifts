@@ -55,29 +55,6 @@ insert into gifts_admin.Redemption_GPS_Gifts (DeviceID, GPSGiftID, DateTime, Red
 insert into gifts_admin.Redemption_GPS_Gifts (DeviceID, GPSGiftID, DateTime, RedeemedStatus) values ('D2012', 'GG1011', '2018-09-03T15:10:09', 'Redeemed');
 commit;
 
-/* Redemption_Crosswords */
-
-DROP SEQUENCE gifts_admin.Redemption_Crosswords_seq;
-
-ALTER TABLE gifts_admin.Redemption_Crosswords ADD (
-  CONSTRAINT Redemption_Crosswords_pk PRIMARY KEY (ID));
-
-CREATE SEQUENCE gifts_admin.Redemption_Crosswords_seq START WITH 100;
-
-CREATE OR REPLACE TRIGGER Redemption_Crosswords_bir 
-BEFORE INSERT ON gifts_admin.Redemption_Crosswords 
-FOR EACH ROW
-
-BEGIN
-  SELECT gifts_admin.Redemption_Crosswords_seq.NEXTVAL
-  INTO   :new.ID
-  FROM   dual;
-END;
-/
-
-insert into gifts_admin.Redemption_Crosswords (DeviceID, CrosswordID, EventDateTime, EventType, EngagementCount, RedeemedStatus) values ('D2002', 'CW3011', '2018-09-03T15:15:00', 'start', 11, 'Redeemed');
-insert into gifts_admin.Redemption_Crosswords (DeviceID, CrosswordID, EventDateTime, EventType, EngagementCount, RedeemedStatus) values ('D2003', 'CW3012', '2018-09-03T15:15:00', 'start', 11, 'Redeemed');
-commit;
 
 /* Redemption_Gifts */
 
@@ -101,4 +78,28 @@ END;
 
 insert into gifts_admin.Redemption_Gifts (GameSourceID, GameSource, DateTime, MemberID, RedeemedStatus) values ('GS4011', 'X', '2018-09-03T15:10:09', 'M12354', 'Redeemed');
 insert into gifts_admin.Redemption_Gifts (GameSourceID, GameSource, DateTime, MemberID, RedeemedStatus) values ('GS4011', 'X', '2018-09-03T15:10:09', 'M12354', 'Redeemed');
+commit;
+
+/* Redemption_Crosswords */
+
+DROP SEQUENCE gifts_admin.Redemption_Crosswords_seq;
+
+ALTER TABLE gifts_admin.Redemption_Crosswords ADD (
+  CONSTRAINT Redemption_Crosswords_pk PRIMARY KEY (ID));
+
+CREATE SEQUENCE gifts_admin.Redemption_Crosswords_seq START WITH 100;
+
+CREATE OR REPLACE TRIGGER Redemption_Crosswords_bir 
+BEFORE INSERT ON gifts_admin.Redemption_Crosswords 
+FOR EACH ROW
+
+BEGIN
+  SELECT gifts_admin.Redemption_Crosswords_seq.NEXTVAL
+  INTO   :new.ID
+  FROM   dual;
+END;
+/
+
+insert into gifts_admin.Redemption_Crosswords (DeviceID, CrosswordID, EventDateTime, EventType, EngagementCount, RedeemedStatus) values ('D2002', 'CW3011', '2018-09-03T15:15:00', 'start', 11, 'Redeemed');
+insert into gifts_admin.Redemption_Crosswords (DeviceID, CrosswordID, EventDateTime, EventType, EngagementCount, RedeemedStatus) values ('D2003', 'CW3012', '2018-09-03T15:15:00', 'start', 11, 'Redeemed');
 commit;

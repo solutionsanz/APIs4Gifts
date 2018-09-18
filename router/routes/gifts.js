@@ -181,7 +181,7 @@ module.exports = function (app) {
 
         log("GET", "/gifts/redeem", "giftId received [" + orderId + "]");
 
-        funct.getGiftGpsRedeem(orderId, function (resMetadata, resData) {
+        funct.getGiftsRedeem(orderId, function (resMetadata, resData) {
 
             log("GET", "/gifts/redeem", "Found: [" + JSON.stringify({
                 resData
@@ -236,7 +236,7 @@ module.exports = function (app) {
         }
 
 
-        funct.insertGpsGiftsRedeem(orders, function () {
+        funct.insertGiftsRedeem(orders, function () {
 
             // Echoing result... node-oradb does not return the id, so let's temporarily return the incoming list of orders
             res.send({

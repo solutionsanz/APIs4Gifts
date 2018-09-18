@@ -108,7 +108,7 @@ exports.insertGpsGiftsRedeem = function (gpsGifts, callback) {
 
 	query += "SELECT * FROM DUAL";
 
-	console.log("GPSGifts length is [" + gpsGifts.length + "]");
+	console.log("GPSGiftsRedeem length is [" + gpsGifts.length + "]");
 	console.log("concatenated query to execute is [" + query + "]");
 
 	insertData(query, params, callback);
@@ -140,7 +140,7 @@ exports.getGiftsRedeem = function (id, callback) {
 exports.insertGiftsRedeem = function (gifts, callback) {
 
 
-	var strQuery = " INTO Redemption_GPS_Gifts (GameSourceID, GameSource, DateTime, MemberID, RedeemedStatus)";
+	var strQuery = " INTO Redemption_Gifts (GameSourceID, GameSource, DateTime, MemberID, RedeemedStatus)";
 	strQuery += " VALUES (:GameSourceID, :GameSource, :DateTime, :MemberID, :RedeemedStatus) ";
 
 	var query = "INSERT ALL";

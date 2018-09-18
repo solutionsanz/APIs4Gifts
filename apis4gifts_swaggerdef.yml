@@ -262,60 +262,6 @@ securityDefinitions:
     name: "x-api-key"
     in: "header"
 definitions:
-  RedemptionGiftsRequest:
-    type: "object"
-    required:
-    - "gamesourceid"
-    - "gamegource"
-    - "datetime"
-    - "memberid"
-    - "redemptionstatus"
-    properties:
-      gamegourceid:
-        type: "string"
-        example: "12345678abcdef"
-      gamesource:
-        type: "string"
-        example: "12345678abcdef"
-      datetime:
-        type: "string"
-        example: "2018-09-03T15:00:00"
-      memberid:
-        type: "string"
-        example: "12345"
-      redemptionstatus:
-        type: "string"
-        example: "Redemption"
-
-  RedemptionGiftsResponse:
-    type: "object"
-    required:
-    - "id"
-    - "gamesourceid"
-    - "gamesource"
-    - "datetime"
-    - "memberid"
-    - "redemptionstatus"
-    properties:
-      id:
-        type: "string"
-        example: "12345678abcdef"
-      gamesourceid:
-        type: "string"
-        example: "12345678abcdef"
-      gamesource:
-        type: "string"
-        example: "12345678abcdef"
-      datetime:
-        type: "string"
-        example: "2018-09-03T15:00:00"
-      memberid:
-        type: "string"
-        example: "12345"
-      redemptionstatus:
-        type: "string"
-        example: "Redemption"
-        
   GPSGiftsRequest:
     type: "object"
     required:
@@ -423,6 +369,60 @@ definitions:
       redeemedstatus:
         type: "string"
         example: "Redemption"      
+
+  RedemptionGiftsRequest:
+    type: "object"
+    required:
+    - "gamesourceid"
+    - "gamesource"
+    - "datetime"
+    - "memberid"
+    - "redemptionstatus"
+    properties:
+      gamesourceid:
+        type: "string"
+        example: "12345678abcdef"
+      gamesource:
+        type: "string"
+        example: "12345678abcdef"
+      datetime:
+        type: "string"
+        example: "2018-09-03T15:00:00"
+      memberid:
+        type: "string"
+        example: "12345"
+      redemptionstatus:
+        type: "string"
+        example: "Redemption"
+
+  RedemptionGiftsResponse:
+    type: "object"
+    required:
+    - "id"
+    - "gamesourceid"
+    - "gamesource"
+    - "datetime"
+    - "memberid"
+    - "redemptionstatus"
+    properties:
+      id:
+        type: "string"
+        example: "12345678abcdef"
+      gamesourceid:
+        type: "string"
+        example: "12345678abcdef"
+      gamesource:
+        type: "string"
+        example: "12345678abcdef"
+      datetime:
+        type: "string"
+        example: "2018-09-03T15:00:00"
+      memberid:
+        type: "string"
+        example: "12345"
+      redemptionstatus:
+        type: "string"
+        example: "Redemption"
         
   RedemptionCrosswordsRequest:
     type: "object"
