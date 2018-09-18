@@ -32,7 +32,7 @@ Containerise APIs 4 Gifts Application
 
             mkdir -p oradbInstantClient/network/admin
 
-   - Assuming that you already have downloaded your Oracle Instant Client and Client Credentials (Security Wallet) – [See here otherwise](https://redthunder.blog/2018/08/16/teaching-how-to-get-started-with-autonomous-database-for-oltp/), expand the Oracle Instant Client zip file inside folder: oradbInstantClient
+   - Assuming that you already have downloaded your Oracle Instant Client and Client Credentials (Security Wallet) – [See here otherwise](https://redthunder.blog/2018/08/16/teaching-how-to-get-started-with-autonomous-database-for-oltp/), expand the Oracle Instant Client zip file inside folder: **oradbInstantClient**
 
    - Now, expand the Oracle Client Credentials (security wallet) zip file inside: **oradbInstantClient/network/admin/**
 
