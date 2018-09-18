@@ -22,6 +22,8 @@ Containerise APIs 4 Gifts Application
     
    - You can now **vagrant ssh** into it.
 
+            vagrant ssh
+
    - Go to your working directory (mounted from host OS).
 
             cd /vagrant
