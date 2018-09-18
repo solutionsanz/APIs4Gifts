@@ -36,9 +36,9 @@ Containerise APIs 4 Gifts Application
 
    - Now, expand the Oracle Client Credentials (security wallet) zip file inside: **oradbInstantClient/network/admin/**
 
-   - Open the file: **oradbInstantClient/network/admin/sqlnet.ora** and set the DIRECTORY value to **/myApp/oradbInstantClient/network/admin** – This value will also align in the Dockerfile. It is used when building your Docker image. 
+   - Open the file: **oradbInstantClient/network/admin/sqlnet.ora** and set the **DIRECTORY** value to **/myApp/oradbInstantClient/network/admin** – This value will also align in the Dockerfile. It is used when building your Docker image. 
 
-   - Open setEnv and set the Oracle ATP environment system properties. Based on your ATP instance, make sure to set your ATP Gifts DB username (NODE_ORACLEDB_USER), ATP Gifts DB password (NODE_ORACLEDB_PASSWORD) and ATP Gifts DB TNS name (NODE_ORACLEDB_CONNECTIONSTRING). If you need help, [read this blog](https://redthunder.blog/2018/08/22/teaching-how-to-get-microservices-to-consume-oracle-autonomous-transaction-processing-database-atp/)
+   - Open **setEnv** and set the Oracle ATP environment system properties. Based on your ATP instance, make sure to set your ATP Gifts DB username (NODE_ORACLEDB_USER), ATP Gifts DB password (NODE_ORACLEDB_PASSWORD) and ATP Gifts DB TNS name (NODE_ORACLEDB_CONNECTIONSTRING). If you need help, [read this blog](https://redthunder.blog/2018/08/22/teaching-how-to-get-microservices-to-consume-oracle-autonomous-transaction-processing-database-atp/)
 
             
    - Switch user to **ubuntu**
@@ -51,11 +51,11 @@ Containerise APIs 4 Gifts Application
 
    - Execute locally your new Docker Image of your APIs 4 ATP Application:
 
-	    docker run --env-file setEnv -p 3000:3000 -it [image_id] 
+            docker run --env-file setEnv -p 3000:3000 -it [image_id] 
 
-        Note, if you are unsure about the actual **image_id**, you can use **docker images** to gather all images being generated.
+                Note, if you are unsure about the actual **image_id**, you can use **docker images** to gather all images being generated.
 
-        Also note that by default port 3000 was configured as a "Port Forward" by vagrant as part of your VM bootstrap during its creation.
+                Also note that by default port 3000 was configured as a "Port Forward" by vagrant as part of your VM bootstrap during its creation.
 
    - In your host OS, open a browser and go to: **http://localhost:3000** - Test your app. 
     
@@ -63,7 +63,7 @@ Containerise APIs 4 Gifts Application
 
             docker login
 
-            Enter docker hub username, password and email.
+                Enter docker hub username, password and email.
 
 Deploy APIs 4 Gifts application in Kubernetes
 ------
@@ -90,7 +90,7 @@ Deploy APIs 4 Gifts application in Kubernetes
             
    - Open up Kubernetes Dashboard UI or equivalent (e.g. WeaveScope) and validate all APIs 4 Gifts resources were deployed successfully.
 
-   - Test your application, open a browser and go to: **http://[LB|IP]/XXX/** - Test your app. 
+   - Test your application, open a browser and go to: **http://[LB]/xxx** - Test your app. 
     
     
 If you need any assistance, feel free to [contact me](https://www.linkedin.com/in/citurria/).
