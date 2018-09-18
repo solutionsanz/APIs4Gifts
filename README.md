@@ -1,18 +1,18 @@
 APIs 4 ATP project
 ------
 
-This repository contains APIs 4 ATP project, that is a quick way consume REST APIs to interact with Oracle Autonomous Database for Online Transaction Processing (ATP). 
+This repository contains APIs 4 Gifts project, that is a quick way consume REST APIs to interact with Oracle Autonomous Database for Online Transaction Processing (ATP). 
 
-Containerise APIs 4 ATP Application
+Containerise APIs 4 Gifts Application
 ------
 
    - Ensure you have installed Vagrant on your laptop/PC. If you need help, [read this blog](https://redthunder.blog/2018/02/13/teaching-how-to-use-vagrant-to-simplify-building-local-dev-and-test-environments/). 
 
    - Download or Git clone this Github repo: 
 
-			git clone https://github.com/solutionsanz/APIs4ATP
+			git clone https://github.com/solutionsanz/APIs4Gifts
 
-   - In a terminal window, go to where you cloned/downloaded the repository (APIs 4 ATP) – Notice that the Vagrantfile is already in there.
+   - In a terminal window, go to where you cloned/downloaded the repository (APIs 4 Gifts) – Notice that the Vagrantfile is already in there.
 
     - Start up your Vagrant Dev VM:
 
@@ -26,39 +26,44 @@ Containerise APIs 4 ATP Application
 
             cd /vagrant
 
-    - Use the setEnv_template to create your own environment properties file. As a minimum, make sure to set the MongoDB server, username and password.
+    - Create a new directory structure: **oradbInstantClient/network/admin**
 
-            cp setEnv_template setEnv && vi setEnv
+            mkdir -p oradbInstantClient/network/admin
 
+    - Assuming that you already have downloaded your Oracle Instant Client and Client Credentials (Security Wallet) – [See here otherwise](https://redthunder.blog/2018/08/16/teaching-how-to-get-started-with-autonomous-database-for-oltp/), expand the Oracle Instant Client zip file inside folder: oradbInstantClient
+
+    - Now, expand the Oracle Client Credentials (security wallet) zip file inside: **oradbInstantClient/network/admin/**
+
+    - Open the file: **oradbInstantClient/network/admin/sqlnet.ora** and set the DIRECTORY value to **/myApp/oradbInstantClient/network/admin** – This value will also align in the Dockerfile. It is used when building your Docker image. 
+
+    - Open setEnv and set the Oracle ATP environment system properties. Based on your ATP instance, make sure to set your ATP Gifts DB username (NODE_ORACLEDB_USER), ATP Gifts DB password (NODE_ORACLEDB_PASSWORD) and ATP Gifts DB TNS name (NODE_ORACLEDB_CONNECTIONSTRING). If you need help, [read this blog](https://redthunder.blog/2018/08/22/teaching-how-to-get-microservices-to-consume-oracle-autonomous-transaction-processing-database-atp/)
+
+            
     - Switch user to **ubuntu**
 
             sudo su ubuntu
 
     - Containerise the application by using the provided Dockerfile:
 
-	        docker build .
+            docker build .
 
     - Execute locally your new Docker Image of your APIs 4 ATP Application:
 
-	        docker run --env-file setEnv -p 3000:3000 -it [image_id] 
+	    docker run --env-file setEnv -p 3000:3000 -it [image_id] 
 
         Note, if you are unsure about the actual **image_id**, you can use **docker images** to gather all images being generated.
 
-        Also note that by default port 3000 was configured in by vagrant as part of your VM setup.
+        Also note that by default port 3000 was configured as a "Port Forward" by vagrant as part of your VM bootstrap during its creation.
 
-    - In your host OS, open a browser and go to: http://localhost:3000/ws - Test your app. 
+    - In your host OS, open a browser and go to: **http://localhost:3000** - Test your app. 
     
-    - Upload some data via the CSV file uploader, then open up the included Swagger UI (http://localhost:3000) and play with the various APIs.
-    
-            Authenticate as: demo
-
     - Once you feel confortable with the Docker image, push it to Docker Hub. First, login to Docker Hub:
 
             docker login
 
             Enter docker hub username, password and email.
 
-Deploy APIs 4 ATP application in Kubernetes
+Deploy APIs 4 Gifts application in Kubernetes
 ------
 
    - Go to where you have installed and configured **kubectl**.
@@ -67,24 +72,23 @@ Deploy APIs 4 ATP application in Kubernetes
 
    - Download or Git clone this Github repo: 
 
-			git clone https://github.com/solutionsanz/APIs 4 ATP
+            git clone https://github.com/solutionsanz/APIs4Gifts
 
-   - Go to where you cloned/downloaded the repository (APIs 4 ATP)
+   - Go to where you cloned/downloaded the repository (APIs 4 Gifts)
 
-    - Change directory to deploy
+    - Change directory to deploy/kubernetes
 
-            cd deploy
+            cd deploy/kubernetes
 
-    - Deploy APIs 4 ATP Kubernetes application resources (deployment, service, ingress)
+    - Use the template **apis4gifts-dpl.yaml_sample** to create a new file **apis4gifts-dpl.yaml** - In this file, at the end, set the Docker image tag name (e.g. xxx/apis4gifts:1.0), ATP DB instance username, password and TNS name.
+
+    - Deploy APIs 4 Gifts Kubernetes application resources (deployment, service, ingress)
 
             ./deploy.sh
+            
+    - Open up Kubernetes Dashboard UI or equivalent (e.g. WeaveScope) and validate all APIs 4 Gifts resources were deployed successfully.
 
-    - Open up Kubernetes Dashboard UI or equivalent (e.g. WeaveScope) and validate all APIs 4 ATP resources were deployed successfully.
-
-    - Test your application, open a browser and go to: **http://[LB|IP]/APIs 4 ATP/ws/** - Test your app. 
+    - Test your application, open a browser and go to: **http://[LB|IP]/XXX/** - Test your app. 
     
-    - Upload some data via the CSV file uploader, then open up the included Swagger UI **http://[LB|IP]/APIs 4 ATP/** and play with the various APIs.
-    
-            Authenticate as: demo
     
 If you need any assistance, feel free to [contact me](https://www.linkedin.com/in/citurria/).
