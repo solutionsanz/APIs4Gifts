@@ -1,7 +1,7 @@
 APIs 4 ATP project
 ------
 
-This repository contains APIs 4 Gifts project, that is a quick way consume REST APIs to interact with Oracle Autonomous Database for Online Transaction Processing (ATP). 
+This repository contains the APIs 4 Gifts projectIt provides a quick way to consume REST APIs that ultimately will interact with Oracle Autonomous Transaction Processing Database (ATP). 
 
 Containerise APIs 4 Gifts Application
 ------
@@ -12,7 +12,7 @@ Containerise APIs 4 Gifts Application
 
 			git clone https://github.com/solutionsanz/APIs4Gifts
 
-   - In a terminal window, go to where you cloned/downloaded the repository (APIs 4 Gifts) – Notice that the Vagrantfile is already in there.
+   - In a terminal window, change directory to where you cloned/downloaded the repository (APIs 4 Gifts) – Notice that the Vagrantfile is already in there.
 
    - Start up your Vagrant Dev VM:
 
@@ -20,11 +20,11 @@ Containerise APIs 4 Gifts Application
 
    - A new Ubuntu VM will be provisioned and a bootstrap script will install all required utilities (e.g. docker).
     
-   - You can now **vagrant ssh** into it.
+   - You can now **vagrant ssh** into the Virtual Machine.
 
             vagrant ssh
 
-   - Go to your working directory (mounted from host OS).
+   - Go to your working directory (mounted from host OS - shred folder).
 
             cd /vagrant
 
@@ -32,13 +32,13 @@ Containerise APIs 4 Gifts Application
 
             mkdir -p oradbInstantClient/network/admin
 
-   - Assuming that you already have downloaded your Oracle Instant Client and Client Credentials (Security Wallet) – [See here otherwise](https://redthunder.blog/2018/08/16/teaching-how-to-get-started-with-autonomous-database-for-oltp/), expand the Oracle Instant Client zip file inside folder: **oradbInstantClient**
+   - Assuming that you already have downloaded (1) the Oracle Instant Client and (2) the Client Credentials (Security Wallet) for the ATP instance – [See here otherwise](https://redthunder.blog/2018/08/16/teaching-how-to-get-started-with-autonomous-database-for-oltp/), expand the Oracle Instant Client zip file inside folder: **oradbInstantClient**
 
    - Now, expand the Oracle Client Credentials (security wallet) zip file inside: **oradbInstantClient/network/admin/**
 
    - Open the file: **oradbInstantClient/network/admin/sqlnet.ora** and set the **DIRECTORY** value to **/myApp/oradbInstantClient/network/admin** – This value will also align in the Dockerfile. It is used when building your Docker image. 
 
-   - Open **setEnv** and set the Oracle ATP environment system properties. Based on your ATP instance, make sure to set your ATP Gifts DB username (NODE_ORACLEDB_USER), ATP Gifts DB password (NODE_ORACLEDB_PASSWORD) and ATP Gifts DB TNS name (NODE_ORACLEDB_CONNECTIONSTRING). If you need help, [read this blog](https://redthunder.blog/2018/08/22/teaching-how-to-get-microservices-to-consume-oracle-autonomous-transaction-processing-database-atp/)
+   - Open **setEnv** properties file and set the Oracle ATP environment system properties. Based on your ATP instance, make sure to set your ATP Gifts DB username (NODE_ORACLEDB_USER), ATP Gifts DB password (NODE_ORACLEDB_PASSWORD) and ATP Gifts DB TNS name (NODE_ORACLEDB_CONNECTIONSTRING). If you need help, [read this blog](https://redthunder.blog/2018/08/22/teaching-how-to-get-microservices-to-consume-oracle-autonomous-transaction-processing-database-atp/)
 
             
    - Switch user to **ubuntu**
@@ -49,7 +49,7 @@ Containerise APIs 4 Gifts Application
 
             docker build .
 
-   - Execute locally your new Docker Image of your APIs 4 ATP Application:
+   - Execute locally your new Docker Image of your APIs 4 Gifts Application:
 
             docker run --env-file setEnv -p 3000:3000 -it [image_id] 
 
@@ -59,7 +59,7 @@ Containerise APIs 4 Gifts Application
 
    - In your host OS, open a browser and go to: **http://localhost:3000** - Test your app. 
     
-   - Once you feel confortable with the Docker image, push it to Docker Hub. First, login to Docker Hub:
+   - Once you feel comfortable with the Docker image, push it to Docker Hub. First, login to Docker Hub:
 
             docker login
 
@@ -90,7 +90,7 @@ Deploy APIs 4 Gifts application in Kubernetes
             
    - Open up Kubernetes Dashboard UI or equivalent (e.g. WeaveScope) and validate all APIs 4 Gifts resources were deployed successfully.
 
-   - Test your application, open a browser and go to: **http://[LB]/xxx** - Test your app. 
+   - Test your application, open a browser and go to: **http://[YOUR_KUBERNETES_LB]/xxx** - Test your app. 
     
     
 If you need any assistance, feel free to [contact me](https://www.linkedin.com/in/citurria/).
