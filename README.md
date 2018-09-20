@@ -1,7 +1,7 @@
 APIs 4 Gifts project
 ------
 
-This repository contains the APIs 4 Gifts projectIt provides a quick way to consume REST APIs that ultimately will interact with Oracle Autonomous Transaction Processing Database (ATP). 
+This repository contains the APIs 4 Gifts project. It provides a quick way to consume REST APIs that ultimately will interact with Oracle Autonomous Transaction Processing Database (ATP). 
 
 Containerise APIs 4 Gifts Application
 ------
