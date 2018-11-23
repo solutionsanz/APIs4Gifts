@@ -1,7 +1,7 @@
 #!/bin/bash
 #microservices..
   #apis4gifts..
-  kubectl delete -f kubernetes/apis4atp-ing.yaml
-  kubectl delete -f kubernetes/apis4atp-svc.yaml
-  kubectl delete -f kubernetes/apis4atp-dpl.yaml
-  kubectl delete namespace apis4atp
+  kubectl delete -f kubernetes/apis4gifts-ing.yaml
+  kubectl delete -f kubernetes/apis4gifts-svc.yaml
+  kubectl delete -f kubernetes/apis4gifts-dpl.yaml
+  kubectl delete namespace apis4gifts
