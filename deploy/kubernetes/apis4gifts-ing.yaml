@@ -1,17 +1,17 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: apis4atpingress
+  name: apis4giftsingress
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
-  namespace: apis4atp      
+  namespace: apis4gifts      
 spec:
   rules:
   - host:
     http:
       paths:
-      - path: /apis4atp
+      - path: /apis4gifts
         backend:
-          serviceName: apis4atpservice
+          serviceName: apis4giftsservice
           servicePort: http
