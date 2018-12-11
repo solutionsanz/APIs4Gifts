@@ -14,6 +14,11 @@ host: "localhost:3000"
 #basePath: "/nf/gifts"
 #host: "apipdev.oracleau.cloud"
 tags:
+- name: "Member"
+  description: "Customer members."
+  externalDocs:
+    description: "Find out more"
+    url: "http://apismadeeasy.cloud"
 - name: "Gifts"
   description: "GPS and other type of Gifts to interact with via mobile application."
   externalDocs:
@@ -30,6 +35,60 @@ schemes:
 security:
   - X-MyAPI-Key: []
 paths:
+  /mobile/member/{memberNumber}:
+    get:
+      tags:
+      - "Member"
+      summary: "Finds member information by MemberNumber."
+      description: "Gets members information"
+      operationId: "getMemberByNumber"
+      produces: 
+        - "application/json"
+      parameters:
+      - name: "memberNumber"
+        in: "path"
+        description: "Field used to filter the record to be returned."
+        required: true
+        type: "string"
+        x-example: '2045917'
+      responses:
+        200:
+          description: "Returns members data."
+          schema:
+            properties:
+              member:
+                $ref: "#/definitions/MembersResponse"
+          examples:
+            application/json:
+              member:
+                lastName: Conradi
+                city: Adelaide
+                postcode: 5000
+                dateOfBirth: 1983-05-09
+                title: Mr
+                membershipStatus: Financial
+                membershipPlan: National Pharmacies - Employee - Family
+                firstName: Daniel
+                emailAddress: daniel.conradi@gmail.com
+                memberNumber: 2045917
+                phoneNumber: 0422 429 979
+                dependants:
+                  - memberNo: 2045917
+                    firstName: Daniel
+                    lastName: Conradi
+                    dateOfBirth: 1983-05-09T00:00:00.000+09:30
+                    relationship: primary
+                  - memberNo: 2045919
+                    firstName: Josephine
+                    lastName: Jaszcz
+                    dateOfBirth: 1983-02-03T00:00:00.000+10:30
+                    relationship: Spouse/Partner
+                membershipExpiry: 2019-01-04T00:00:00.000+10:30
+                addressLine1: 52 Gawler Place
+                addressLine2: null
+                state: SA
+                memberBarcode: 2700020459175
+
   /gifts/gps:
     get:
       tags:
@@ -366,6 +425,105 @@ securityDefinitions:
     name: "x-api-key"
     in: "header"
 definitions:
+  MembersResponse:
+    type: "object"
+    required:
+    - "lastName"
+    - "city"
+    - "postcode"
+    - "dateOfBirth"
+    - "title"
+    - "membershipStatus"
+    - "membershipPlan"
+    - "firstName"
+    - "emailAddress"
+    - "memberNumber"
+    - "phoneNumber"
+    - "dependants"
+    - "membershipExpiry"
+    - "addressLine1"
+    - "addressLine2"
+    - "state"
+    - "memberBarcode"
+    properties:
+      lastName:
+        type: "string"
+        example: "Conradi"
+      city:
+        type: "string"
+        example: "Adelaide"
+      postcode:
+        type: "number"
+        example: "5000"
+      dateOfBirth:
+        type: "string"
+        example: "1983-05-09"
+      title:
+        type: "string"
+        example: "Mr"
+      membershipStatus:
+        type: "string"
+        example: "Financial"
+      membershipPlan:
+        type: "string"
+        example: "National Pharmacies - Employee - Family"
+      firstName:
+        type: "string"
+        example: "Daniel"
+      emailAddress:
+        type: "string"
+        example: "daniel.conradi@gmail.com"
+      memberNumber:
+        type: "number"
+        example: "2045917"
+      phoneNumber:
+        type: "string"
+        example: "0422 429 979"
+      dependants:
+        type: "array"
+        items:
+          $ref: "#/definitions/dependants"          
+      membershipExpiry:
+        type: "string"
+        example: "2019-01-04T00:00:00.000+10:30"
+      addressLine1:
+        type: "string"
+        example: "52 Gawler Place"
+      addressLine2:
+        type: "string"
+        example: "null"
+      state:
+        type: "string"
+        example: "SA"
+      memberBarcode:
+        type: "number"
+        example: "2700020459175"
+
+  dependants:
+    type: "object"
+    required:
+    - "memberNo"
+    - "firstName"
+    - "lastName"
+    - "dateOfBirth"
+    - "relationship"
+    properties:
+      memberNo:
+        type: "number"
+        example: "2045917"
+      firstName:
+        type: "string"
+        example: "Daniel"
+      lastName:
+        type: "string"
+        example: "Conradi"
+      dateOfBirth:
+        type: "string"
+        example: "1983-05-09T00:00:00.000+09:30"
+      relationship:
+        type: "string"
+        example: "Primary"
+
   GPSGiftsRequest:
     type: "object"
     required:
