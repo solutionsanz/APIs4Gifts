@@ -14,7 +14,7 @@ host: "localhost:3000"
 #basePath: "/nf/gifts"
 #host: "apipdev.oracleau.cloud"
 tags:
-- name: "Member"
+- name: "Members"
   description: "Customer members."
   externalDocs:
     description: "Find out more"
@@ -35,10 +35,10 @@ schemes:
 security:
   - X-MyAPI-Key: []
 paths:
-  /mobile/member/{memberNumber}:
+  /mobile/members/{memberNumber}:
     get:
       tags:
-      - "Member"
+      - "Members"
       summary: "Finds member information by MemberNumber."
       description: "Gets members information"
       operationId: "getMemberByNumber"
