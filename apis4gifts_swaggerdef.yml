@@ -55,6 +55,23 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/definitions/GPSGiftsResponse"
+          examples:
+            application/json:
+              GPSGifts:
+                - id: 12345678abcdef
+                  gpsgiftid: 12345678abcdef
+                  latitude: -37.835311
+                  longtitude: 144.9725336
+                  altitude: 31
+                  imageurl: https://i.4pcdn.org/x/1508011708146.png
+                  redemptionaction: Active
+                - id: 99945678abcdef
+                  gpsgiftid: 99945678abcdef
+                  latitude: -37.835311
+                  longtitude: 144.9725336
+                  altitude: 31
+                  imageurl: https://i.4pcdn.org/x/1508011708146.png
+                  redemptionaction: Closed                  
     post:
       tags:
       - "Gifts"
@@ -85,6 +102,21 @@ paths:
                 type: "array"
                 items:
                   $ref: '#/definitions/GPSGiftsResponse'
+          examples:
+            application/json:
+              GPSGifts:
+                - gpsgiftid: 12345678abcdef
+                  latitude: -37.835311
+                  longtitude: 144.9725336
+                  altitude: 31
+                  imageurl: https://i.4pcdn.org/x/1508011708146.png
+                  redemptionaction: Active
+                - gpsgiftid: 99945678abcdef
+                  latitude: -37.835311
+                  longtitude: 144.9725336
+                  altitude: 31
+                  imageurl: https://i.4pcdn.org/x/1508011708146.png
+                  redemptionaction: Closed                  
 
   /gifts/gps/redeem:
     get:
@@ -111,6 +143,20 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/definitions/RedemptionGPSGiftsResponse"
+          examples:
+            application/json:
+              RedemptionGPSGifts:
+                - id: 12345678abcdef
+                  deviceid: 12345678abcdef
+                  gpsgiftid: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  redeemedstatus: Redemption
+                - id: 12345678abcdef
+                  deviceid: 12345678abcdef
+                  gpsgiftid: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  redeemedstatus: Redemption
+                  
     post:
       tags:
       - "Gifts"
@@ -141,6 +187,17 @@ paths:
                 type: "array"
                 items:
                   $ref: '#/definitions/RedemptionGPSGiftsResponse'
+          examples:
+            application/json:
+              RedemptionGPSGifts:
+                - deviceid: 12345678abcdef
+                  gpsgiftid: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  redeemedstatus: Redemption
+                - deviceid: 12345678abcdef
+                  gpsgiftid: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  redeemedstatus: Redemption                  
 
 
   /gifts/redeem:
@@ -168,6 +225,22 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/definitions/RedemptionGiftsResponse"
+          examples:
+            application/json:
+              RedemptionGifts:
+                - id: 12345678abcdef
+                  gamesourceid: 12345678abcdef
+                  gamesource: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  memberid: 12345
+                  redemptionstatus: Redemption
+                - id: 12345678abcdef
+                  gamesourceid: 12345678abcdef
+                  gamesource: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  memberid: 12345
+                  redemptionstatus: Redemption
+                  
     post:
       tags:
       - "Gifts"
@@ -198,6 +271,19 @@ paths:
                 type: "array"
                 items:
                   $ref: '#/definitions/RedemptionGiftsResponse'
+          examples:
+            application/json:
+              RedemptionGifts:
+                - gamesourceid: 12345678abcdef
+                  gamesource: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  memberid: 12345
+                  redemptionstatus: Redemption
+                - gamesourceid: 12345678abcdef
+                  gamesource: 12345678abcdef
+                  datetime: 2018-09-03T15:10:00
+                  memberid: 12345
+                  redemptionstatus: Redemption                  
                   
   /crosswords/redeem:
     get:
@@ -224,6 +310,24 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/definitions/RedemptionCrosswordsResponse"
+          examples:
+            application/json:
+              RedemptionCrosswords:
+                - id: 12345678abcdef
+                  deviceid: 12345678abcdef
+                  crosswordid: 12345678abcdef
+                  eventdatetime: 2018-09-03T15:10:00
+                  eventtype: start
+                  engagementcount: 45
+                  redemptionstatus: Redemption
+                - id: 12345678abcdef
+                  deviceid: 12345678abcdef
+                  crosswordid: 12345678abcdef
+                  eventdatetime: 2018-09-03T15:10:00
+                  eventtype: start
+                  engagementcount: 45
+                  redemptionstatus: Redemption
+                  
     post:
       tags:
       - "Crosswords"
@@ -465,6 +569,9 @@ definitions:
     - "redemptionstatus"
     properties:
       id:
+        type: "string"
+        example: "12345678abcdef"
+      deviceid:
         type: "string"
         example: "12345678abcdef"
       crosswordid:
