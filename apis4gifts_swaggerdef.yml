@@ -14,129 +14,261 @@ host: "localhost:3000"
 #basePath: "/nf/gifts"
 #host: "apipdev.oracleau.cloud"
 tags:
-- name: "Members"
-  description: "Customer members."
+- name: "Games"
+  description: "Games to be played"
   externalDocs:
     description: "Find out more"
     url: "http://apismadeeasy.cloud"
-- name: "Gifts"
-  description: "GPS and other type of Gifts to interact with via mobile application."
+- name: "GameObjects"
+  description: "Game object interactions, e.g. Augmented Reality."
   externalDocs:
     description: "Find out more"
     url: "http://apismadeeasy.cloud"
-- name: "Crosswords"
-  description: " Crosswords to be Redemption via mobile application."
+- name: "GamePlayerInteractions"
+  description: "This is the interaction of Players interacting with a particular Game."
   externalDocs:
     description: "Find out more"
     url: "http://apismadeeasy.cloud"
+- name: "GamePlayers"
+  description: "Players to be engaging into a game."
+  externalDocs:
+    description: "Find out more"
+    url: "http://apismadeeasy.cloud"    
 schemes:
 #- "https"
 - "http"
 security:
   - X-MyAPI-Key: []
 paths:
-  /mobile/members/{memberNumber}:
+  /games:
     get:
       tags:
-      - "Members"
-      summary: "Finds member information by MemberNumber."
-      description: "Gets members information"
-      operationId: "getMemberByNumber"
+      - "Games"
+      summary: "Finds all records information."
+      description: "Gets all records information"
+      operationId: "getGames"
+      produces: 
+        - "application/json"
+      responses:
+        200:
+          description: "Returns records data."
+          schema:
+            properties:
+              games:
+                type: "array"
+                items:
+                  $ref: "#/definitions/GamesResponse"
+          examples:
+            application/json:
+              games:
+                - gid: 12345
+                  name: koala
+                - gid: 12346
+                  name: kangaroo
+  /games/{gid}:
+    get:
+      tags:
+      - "Games"
+      summary: "Finds records information."
+      description: "Gets all records information or by Id"
+      operationId: "getGamesById"
       produces: 
         - "application/json"
       parameters:
-      - name: "memberNumber"
+      - name: "gid"
         in: "path"
         description: "Field used to filter the record to be returned."
         required: true
         type: "string"
-        x-example: '2045917'
+        x-example: '12345'
       responses:
         200:
-          description: "Returns members data."
+          description: "Returns records data."
           schema:
             properties:
-              member:
-                $ref: "#/definitions/MembersResponse"
+              game:
+                $ref: "#/definitions/GamesResponse"
           examples:
             application/json:
-              member:
-                lastName: Conradi
-                city: Adelaide
-                postcode: 5000
-                dateOfBirth: 1983-05-09
-                title: Mr
-                membershipStatus: Financial
-                membershipPlan: National Pharmacies - Employee - Family
-                firstName: Daniel
-                emailAddress: daniel.conradi@gmail.com
-                memberNumber: 2045917
-                phoneNumber: 0422 429 979
-                dependants:
-                  - memberNo: 2045917
-                    firstName: Daniel
-                    lastName: Conradi
-                    dateOfBirth: 1983-05-09T00:00:00.000+09:30
-                    relationship: primary
-                  - memberNo: 2045919
-                    firstName: Josephine
-                    lastName: Jaszcz
-                    dateOfBirth: 1983-02-03T00:00:00.000+10:30
-                    relationship: Spouse/Partner
-                membershipExpiry: 2019-01-04T00:00:00.000+10:30
-                addressLine1: 52 Gawler Place
-                addressLine2: null
-                state: SA
-                memberBarcode: 2700020459175
+              game:
+                gid: 12345
+                name: koala
 
-  /gifts/gps:
+  /gos:
     get:
       tags:
-      - "Gifts"
-      summary: "Finds all available GPS Gifts."
-      description: "Gets all GPS Gifts"
-      operationId: "getGPSGifts"
+      - "GameObjects"
+      summary: "Finds all records information."
+      description: "Gets all records information"
+      operationId: "getGameObjects"
+      produces: 
+        - "application/json"
+      responses:
+        200:
+          description: "Returns records data."
+          schema:
+            properties:
+              gameObjects:
+                type: "array"
+                items:
+                  $ref: "#/definitions/GameObjectsResponse"
+          examples:
+            application/json:
+              gameObjects:
+                - goid: 12345
+                  name: koala
+                  description: Try to play with this amazing game.
+                  latitude: -37.835311
+                  longtitude: 144.9725336
+                  altitude: 31
+                  imageURL: https://i.4pcdn.org/x/1508011708146.png
+                  type: ar
+                  gid: 12345
+                - goid: 12346
+                  name: bear
+                  description: Try to play with this amazing game.
+                  latitude: -37.835311
+                  longtitude: 144.9725336
+                  altitude: 31
+                  imageURL: https://i.4pcdn.org/x/1508011708146.png
+                  type: reveal
+                  gid: 12345
+
+  /gos/{goid}:
+    get:
+      tags:
+      - "GameObjects"
+      summary: "Finds records information."
+      description: "Gets all records information or by Id"
+      operationId: "getGameObjectsById"
       produces: 
         - "application/json"
       parameters:
-      - name: "gpsGiftId"
-        in: "query"
-        description: "Field name used to filter the record to be returned."
-        required: false
+      - name: "goid"
+        in: "path"
+        description: "Field used to filter the record to be returned."
+        required: true
         type: "string"
-        x-example: '12345678ABCDEF'
+        x-example: '12345'
       responses:
         200:
-          description: "Returns the full list of GPSGifts."
+          description: "Returns records data."
           schema:
             properties:
-              GPSGifts:
-                type: "array"
-                items:
-                  $ref: "#/definitions/GPSGiftsResponse"
+              gameObject:
+                $ref: "#/definitions/GameObjectsResponse"
           examples:
             application/json:
-              GPSGifts:
-                - id: 12345678abcdef
-                  gpsgiftid: 12345678abcdef
-                  latitude: -37.835311
-                  longtitude: 144.9725336
-                  altitude: 31
-                  imageurl: https://i.4pcdn.org/x/1508011708146.png
-                  redemptionaction: Active
-                - id: 99945678abcdef
-                  gpsgiftid: 99945678abcdef
-                  latitude: -37.835311
-                  longtitude: 144.9725336
-                  altitude: 31
-                  imageurl: https://i.4pcdn.org/x/1508011708146.png
-                  redemptionaction: Closed                  
+              gameObject:
+                goid: 12346
+                name: bear
+                description: Try to play with this amazing game.
+                latitude: -37.835311
+                longtitude: 144.9725336
+                altitude: 31
+                imageURL: https://i.4pcdn.org/x/1508011708146.png
+                type: reveal
+                gid: 12345
+
+
+  /players:
+    get:
+      tags:
+      - "GamePlayers"
+      summary: "Finds all records information."
+      description: "Gets all records information"
+      operationId: "getGamePlayers"
+      produces: 
+        - "application/json"
+      responses:
+        200:
+          description: "Returns records data."
+          schema:
+            properties:
+              players:
+                type: "array"
+                items:
+                  $ref: "#/definitions/GamePlayersResponse"
+          examples:
+            application/json:
+              players:
+                - gpid: 12345
+                  memberId: 54321
+                  name: Daniel Jonas
+                - gpid: 12346
+                  memberId: 34567
+                  name: Brenton Lee
+
+  /players/{gpid}:
+    get:
+      tags:
+      - "GamePlayers"
+      summary: "Finds records information."
+      description: "Gets all records information or by Id"
+      operationId: "getGamePlayersById"
+      produces: 
+        - "application/json"
+      parameters:
+      - name: "gpid"
+        in: "path"
+        description: "Field used to filter the record to be returned."
+        required: true
+        type: "string"
+        x-example: '12345'
+      responses:
+        200:
+          description: "Returns records data."
+          schema:
+            properties:
+              player:
+                $ref: "#/definitions/GamePlayersResponse"
+          examples:
+            application/json:
+              player:
+                gpid: 12346
+                memberId: 34567
+                name: Brenton Lee     
+
+  /gpis:
+    get:
+      tags:
+      - "GamePlayerInteractions"
+      summary: "Finds records information."
+      description: "Gets all records information by using optional filters."
+      operationId: "getGamePlayerInteractions"
+      produces: 
+        - "application/json"
+      responses:
+        200:
+          description: "Returns records data."
+          schema:
+            properties:
+              GamePlayerInteractions:
+                type: "array"
+                items:
+                  $ref: "#/definitions/GamePlayerInteractionsResponse"
+          examples:
+            application/json:
+              GamePlayerInteractions:
+                - goid: 12345
+                  gpid: 54321
+                  gpiLat: -37.835311
+                  gpiLong: 144.9725336
+                  gpiDate: 18-DEC-2018
+                  gpiResult: Accepted
+                - goid: 12346
+                  gpid: 54322
+                  gpiLat: -37.835311
+                  gpiLong: 144.9725336
+                  gpiDate: 18-DEC-2018
+                  gpiResult: Accepted
+              
     post:
       tags:
-      - "Gifts"
-      summary: "Creates new GPS Gifts."
+      - "GamePlayerInteractions"
+      summary: "Creates new Records."
       description: "Returns the just inserted record(s)."
-      operationId: "postGpsGifts"
+      operationId: "postGamePlayerInteractions"
       consumes:
       - "application/json"
       produces:
@@ -144,279 +276,38 @@ paths:
       parameters:
       - in: "body"
         name: "body"
-        description: "Array of GPS Gift(s) that need to be added."
+        description: "Array of records that need to be added."
         required: true
         schema:
             properties:
-              GPSGifts:
+              GamePlayerInteractions:
                 type: "array"
                 items:
-                  $ref: "#/definitions/GPSGiftsRequest"
+                  $ref: "#/definitions/GamePlayerInteractionsRequest"
       responses:
         200:
           description: "Returns the just created record(s)."
           schema:
             properties:
-              GPSGifts:
+              GamePlayerInteractions:
                 type: "array"
                 items:
-                  $ref: '#/definitions/GPSGiftsResponse'
+                  $ref: '#/definitions/GamePlayerInteractionsResponse'
           examples:
             application/json:
-              GPSGifts:
-                - gpsgiftid: 12345678abcdef
-                  latitude: -37.835311
-                  longtitude: 144.9725336
-                  altitude: 31
-                  imageurl: https://i.4pcdn.org/x/1508011708146.png
-                  redemptionaction: Active
-                - gpsgiftid: 99945678abcdef
-                  latitude: -37.835311
-                  longtitude: 144.9725336
-                  altitude: 31
-                  imageurl: https://i.4pcdn.org/x/1508011708146.png
-                  redemptionaction: Closed                  
-
-  /gifts/gps/redeem:
-    get:
-      tags:
-      - "Gifts"
-      summary: "Finds all available Redemptions for GPS Gifts"
-      description: "Gets all Redemptions for GPS Gifts"
-      operationId: "getRedemptionGPSGifts"
-      produces: 
-        - "application/json"
-      parameters:
-      - name: "gpsGiftId"
-        in: "query"
-        description: "Field name used to filter the record to be returned."
-        required: false
-        type: "string"
-        x-example: '12345678ABCDEF'
-      responses:
-        200:
-          description: "Returns the full list of GPSGifts."
-          schema:
-            properties:
-              RedemptionGPSGifts:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RedemptionGPSGiftsResponse"
-          examples:
-            application/json:
-              RedemptionGPSGifts:
-                - id: 12345678abcdef
-                  deviceid: 12345678abcdef
-                  gpsgiftid: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  redeemedstatus: Redemption
-                - id: 12345678abcdef
-                  deviceid: 12345678abcdef
-                  gpsgiftid: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  redeemedstatus: Redemption
-                  
-    post:
-      tags:
-      - "Gifts"
-      summary: "Creates new Redemption GPS Gifts."
-      description: "Returns the just inserted record(s)."
-      operationId: "postRedemptionGpsGifts"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Array of Redemption GPS Gift(s) that need to be added."
-        required: true
-        schema:
-            properties:
-              RedemptionGPSGifts:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RedemptionGPSGiftsRequest"
-      responses:
-        200:
-          description: "Returns the just created record(s)."
-          schema:
-            properties:
-              RedemptionGPSGifts:
-                type: "array"
-                items:
-                  $ref: '#/definitions/RedemptionGPSGiftsResponse'
-          examples:
-            application/json:
-              RedemptionGPSGifts:
-                - deviceid: 12345678abcdef
-                  gpsgiftid: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  redeemedstatus: Redemption
-                - deviceid: 12345678abcdef
-                  gpsgiftid: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  redeemedstatus: Redemption                  
-
-
-  /gifts/redeem:
-    get:
-      tags:
-      - "Gifts"
-      summary: "Finds all Redemption available non-GPS Gifts"
-      description: "Gets all Redemption available non-GPS Gifts"
-      operationId: "getRedemptionGifts"
-      produces: 
-        - "application/json"
-      parameters:
-      - name: "giftId"
-        in: "query"
-        description: "Field name used to filter the record to be returned."
-        required: false
-        type: "string"
-        x-example: '12345678ABCDEF'
-      responses:
-        200:
-          description: "Returns the full list of Gifts."
-          schema:
-            properties:
-              RedemptionGifts:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RedemptionGiftsResponse"
-          examples:
-            application/json:
-              RedemptionGifts:
-                - id: 12345678abcdef
-                  gamesourceid: 12345678abcdef
-                  gamesource: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  memberid: 12345
-                  redemptionstatus: Redemption
-                - id: 12345678abcdef
-                  gamesourceid: 12345678abcdef
-                  gamesource: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  memberid: 12345
-                  redemptionstatus: Redemption
-                  
-    post:
-      tags:
-      - "Gifts"
-      summary: "Creates new Redemption non-GPS Gifts."
-      description: "Returns the just inserted record(s)."
-      operationId: "postRedemptionGifts"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Array of Redemption non-GPS Gift(s) that need to be added."
-        required: true
-        schema:
-            properties:
-              RedemptionGifts:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RedemptionGiftsRequest"
-      responses:
-        200:
-          description: "Returns the just created record(s)."
-          schema:
-            properties:
-              RedemptionGifts:
-                type: "array"
-                items:
-                  $ref: '#/definitions/RedemptionGiftsResponse'
-          examples:
-            application/json:
-              RedemptionGifts:
-                - gamesourceid: 12345678abcdef
-                  gamesource: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  memberid: 12345
-                  redemptionstatus: Redemption
-                - gamesourceid: 12345678abcdef
-                  gamesource: 12345678abcdef
-                  datetime: 2018-09-03T15:10:00
-                  memberid: 12345
-                  redemptionstatus: Redemption                  
-                  
-  /crosswords/redeem:
-    get:
-      tags:
-      - "Crosswords"
-      summary: "Finds all Redemption available Crosswords"
-      description: "Gets all Redemption available Crosswords"
-      operationId: "getCrosswords"
-      produces: 
-        - "application/json"
-      parameters:
-      - name: "crosswordId"
-        in: "query"
-        description: "Field name used to filter the record to be returned."
-        required: false
-        type: "string"
-        x-example: '12345678ABCDEF'
-      responses:
-        200:
-          description: "Returns the full list of Gifts."
-          schema:
-            properties:
-              RedemptionCrosswords:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RedemptionCrosswordsResponse"
-          examples:
-            application/json:
-              RedemptionCrosswords:
-                - id: 12345678abcdef
-                  deviceid: 12345678abcdef
-                  crosswordid: 12345678abcdef
-                  eventdatetime: 2018-09-03T15:10:00
-                  eventtype: start
-                  engagementcount: 45
-                  redemptionstatus: Redemption
-                - id: 12345678abcdef
-                  deviceid: 12345678abcdef
-                  crosswordid: 12345678abcdef
-                  eventdatetime: 2018-09-03T15:10:00
-                  eventtype: start
-                  engagementcount: 45
-                  redemptionstatus: Redemption
-                  
-    post:
-      tags:
-      - "Crosswords"
-      summary: "Creates new Redemption Crosswords."
-      description: "Returns the just inserted record(s)."
-      operationId: "postCrosswords"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Array of Redemption Crosswords that need to be added."
-        required: true
-        schema:
-            properties:
-              RedemptionCrosswords:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RedemptionCrosswordsRequest"
-      responses:
-        200:
-          description: "Returns the just created record(s)."
-          schema:
-            properties:
-              RedemptionCrosswords:
-                type: "array"
-                items:
-                  $ref: "#/definitions/RedemptionCrosswordsResponse"
+              GamePlayerInteractions:
+                - goid: 12345
+                  gpid: 54321
+                  gpiLat: -37.835311
+                  gpiLong: 144.9725336
+                  gpiDate: 18-DEC-2018
+                  gpiResult: Accepted
+                - goid: 12346
+                  gpid: 54322
+                  gpiLat: -37.835311
+                  gpiLong: 144.9725336
+                  gpiDate: 18-DEC-2018
+                  gpiResult: Accepted
 
 
 securityDefinitions:
@@ -425,329 +316,136 @@ securityDefinitions:
     name: "x-api-key"
     in: "header"
 definitions:
-  MembersResponse:
+  GamesResponse:
     type: "object"
     required:
-    - "lastName"
-    - "city"
-    - "postcode"
-    - "dateOfBirth"
-    - "title"
-    - "membershipStatus"
-    - "membershipPlan"
-    - "firstName"
-    - "emailAddress"
-    - "memberNumber"
-    - "phoneNumber"
-    - "dependants"
-    - "membershipExpiry"
-    - "addressLine1"
-    - "addressLine2"
-    - "state"
-    - "memberBarcode"
+    - "gid"
+    - "name"
     properties:
-      lastName:
-        type: "string"
-        example: "Conradi"
-      city:
-        type: "string"
-        example: "Adelaide"
-      postcode:
+      gid:
         type: "number"
-        example: "5000"
-      dateOfBirth:
+        example: 12345
+      name:
         type: "string"
-        example: "1983-05-09"
-      title:
-        type: "string"
-        example: "Mr"
-      membershipStatus:
-        type: "string"
-        example: "Financial"
-      membershipPlan:
-        type: "string"
-        example: "National Pharmacies - Employee - Family"
-      firstName:
-        type: "string"
-        example: "Daniel"
-      emailAddress:
-        type: "string"
-        example: "daniel.conradi@gmail.com"
-      memberNumber:
-        type: "number"
-        example: "2045917"
-      phoneNumber:
-        type: "string"
-        example: "0422 429 979"
-      dependants:
-        type: "array"
-        items:
-          $ref: "#/definitions/dependants"          
-      membershipExpiry:
-        type: "string"
-        example: "2019-01-04T00:00:00.000+10:30"
-      addressLine1:
-        type: "string"
-        example: "52 Gawler Place"
-      addressLine2:
-        type: "string"
-        example: "null"
-      state:
-        type: "string"
-        example: "SA"
-      memberBarcode:
-        type: "number"
-        example: "2700020459175"
+        example: "koala"
 
-  dependants:
+  GameObjectsResponse:
     type: "object"
     required:
-    - "memberNo"
-    - "firstName"
-    - "lastName"
-    - "dateOfBirth"
-    - "relationship"
-    properties:
-      memberNo:
-        type: "number"
-        example: "2045917"
-      firstName:
-        type: "string"
-        example: "Daniel"
-      lastName:
-        type: "string"
-        example: "Conradi"
-      dateOfBirth:
-        type: "string"
-        example: "1983-05-09T00:00:00.000+09:30"
-      relationship:
-        type: "string"
-        example: "Primary"
-
-  GPSGiftsRequest:
-    type: "object"
-    required:
-    - "gpsgiftid"
+    - "goid"
+    - "name"
+    - "description"
     - "latitude"
     - "longtitude"
     - "altitude"
-    - "imageurl"
-    - "redemptionaction"
+    - "imageURL"
+    - "type"
+    - "gid"
     properties:
-      gpsgiftid:
+      goid:
+        type: "number"
+        example: 12346
+      name:
         type: "string"
-        example: "12345678abcdef"
+        example: "bear"
+      description:
+        type: "string"
+        example: "Try to play with this amazing game."
       latitude:
         type: "number"
-        example: "-37.835311"
+        example: -37.835311
       longtitude:
         type: "number"
-        example: "144.9725336"
+        example: 144.9725336
       altitude:
         type: "number"
-        example: "31"
-      imageurl:
+        example: 31
+      imageURL:
         type: "string"
         example: "https://i.4pcdn.org/x/1508011708146.png"
-      redemptionaction:
+      type:
         type: "string"
-        example: "Active"
-
-  GPSGiftsResponse:
-    type: "object"
-    required:
-    - "id"
-    - "gpsgiftid"
-    - "latitude"
-    - "longtitude"
-    - "altitude"
-    - "imageurl"
-    - "redemptionaction"
-    properties:
-      id:
-        type: "string"
-        example: "12345678abcdef"
-      gpsgiftid:
-        type: "string"
-        example: "12345678abcdef"
-      latitude:
+        example: "reveal"
+      gid:
         type: "number"
-        example: "-37.835311"
-      longtitude:
-        type: "number"
-        example: "144.9725336"
-      altitude:
-        type: "number"
-        example: "31"
-      imageurl:
-        type: "string"
-        example: "https://i.4pcdn.org/x/1508011708146.png"
-      redemptionaction:
-        type: "string"
-        example: "Active"
-        
-  RedemptionGPSGiftsRequest:
-    type: "object"
-    required:
-    - "deviceid"
-    - "gpsgiftid"
-    - "datetime"
-    - "redeemedstatus"
-    properties:
-      deviceid:
-        type: "string"
-        example: "12345678abcdef"
-      gpsgiftid:
-        type: "string"
-        example: "12345678abcdef"
-      datetime:
-        type: "string"
-        example: "2018-09-03T15:10:00"
-      redeemedstatus:
-        type: "string"
-        example: "Redemption"
+        example: 12345
 
-  RedemptionGPSGiftsResponse:
+  GamePlayersResponse:
     type: "object"
     required:
-    - "id"
-    - "deviceid"
-    - "gpsgiftid"
-    - "datetime"
-    - "redeemedstatus"
+    - "gpid"
+    - "memberId"
+    - "name"
     properties:
-      id:
-        type: "string"
-        example: "12345678abcdef"
-      deviceid:
-        type: "string"
-        example: "12345678abcdef"
-      gpsgiftid:
-        type: "string"
-        example: "12345678abcdef"
-      datetime:
-        type: "string"
-        example: "2018-09-03T15:10:00"
-      redeemedstatus:
-        type: "string"
-        example: "Redemption"      
-
-  RedemptionGiftsRequest:
-    type: "object"
-    required:
-    - "gamesourceid"
-    - "gamesource"
-    - "datetime"
-    - "memberid"
-    - "redemptionstatus"
-    properties:
-      gamesourceid:
-        type: "string"
-        example: "12345678abcdef"
-      gamesource:
-        type: "string"
-        example: "12345678abcdef"
-      datetime:
-        type: "string"
-        example: "2018-09-03T15:00:00"
-      memberid:
-        type: "string"
-        example: "12345"
-      redemptionstatus:
-        type: "string"
-        example: "Redemption"
-
-  RedemptionGiftsResponse:
-    type: "object"
-    required:
-    - "id"
-    - "gamesourceid"
-    - "gamesource"
-    - "datetime"
-    - "memberid"
-    - "redemptionstatus"
-    properties:
-      id:
-        type: "string"
-        example: "12345678abcdef"
-      gamesourceid:
-        type: "string"
-        example: "12345678abcdef"
-      gamesource:
-        type: "string"
-        example: "12345678abcdef"
-      datetime:
-        type: "string"
-        example: "2018-09-03T15:00:00"
-      memberid:
-        type: "string"
-        example: "12345"
-      redemptionstatus:
-        type: "string"
-        example: "Redemption"
-        
-  RedemptionCrosswordsRequest:
-    type: "object"
-    required:
-    - "deviceid"
-    - "crosswordid"
-    - "eventdatetime"
-    - "eventtype"
-    - "engagementcount"
-    - "redemptionstatus"
-    properties:
-      deviceid:
-        type: "string"
-        example: "12345678abcdef"
-      crosswordid:
-        type: "string"
-        example: "12345678abcdef"
-      eventdatetime:
-        type: "string"
-        example: "2018-09-03T15:10:00"
-      eventtype:
-        type: "string"
-        example: "start"
-      engagementcount:
+      gpid:
         type: "number"
-        example: 45
-      redemptionstatus:
+        example: 12345
+      memberId:
+        type: "number"
+        example: 54321
+      name:
         type: "string"
-        example: "Redemption"
+        example: "Daniel Jonas"      
 
-  RedemptionCrosswordsResponse:
+
+  GamePlayerInteractionsRequest:
     type: "object"
     required:
-    - "id"
-    - "deviceid"
-    - "crosswordid"
-    - "eventdatetime"
-    - "eventtype"
-    - "engagementcount"
-    - "redemptionstatus"
+    - "goid"
+    - "gpid"
+    - "gpiLat"
+    - "gpiLong"
+    - "gpiDate"
+    - "gpiResult"
     properties:
-      id:
-        type: "string"
-        example: "12345678abcdef"
-      deviceid:
-        type: "string"
-        example: "12345678abcdef"
-      crosswordid:
-        type: "string"
-        example: "12345678abcdef"
-      eventdatetime:
-        type: "string"
-        example: "2018-09-03T15:10:00"
-      eventtype:
-        type: "string"
-        example: "start"
-      engagementcount:
+      goid:
         type: "number"
-        example: 45
-      redemptionstatus:
+        example: 12346
+      gpid:
+        type: "number"
+        example: 54322
+      gpiLat:
+        type: "number"
+        example: -37.835311
+      gpiLong:
+        type: "number"
+        example: 144.9725336
+      gpiDate:
         type: "string"
-        example: "Redemption"            
-            
+        example: "18-DEC-2018"
+      gpiResult:
+        type: "string"
+        example: "Acepted"
+
+  GamePlayerInteractionsResponse:
+    type: "object"
+    required:
+    - "goid"
+    - "gpid"
+    - "gpiLat"
+    - "gpiLong"
+    - "gpiDate"
+    - "gpiResult"
+    properties:
+      goid:
+        type: "number"
+        example: 12346
+      gpid:
+        type: "number"
+        example: 54322
+      gpiLat:
+        type: "number"
+        example: -37.835311
+      gpiLong:
+        type: "number"
+        example: 144.9725336
+      gpiDate:
+        type: "string"
+        example: "18-DEC-2018"
+      gpiResult:
+        type: "string"
+        example: "Acepted"
+
 externalDocs:
   description: "Find out more about our APIs"
   url: "http://apisMadeEasy.cloud"

@@ -49,21 +49,40 @@ Containerise APIs 4 Gifts Application
 
             docker build .
 
-   - Execute locally your new Docker Image of your APIs 4 Gifts Application:
+   - Execute locally your new Docker Image of your Application:
 
             docker run --env-file setEnv -p 3000:3000 -it [image_id] 
 
-                Note, if you are unsure about the actual "image_id", you can use "docker images" to gather all images being generated.
+            By default port 3000 was configured as a "Port Forward" by vagrant as part of your VM bootstrap during its creation.
 
-                Also note that by default port 3000 was configured as a "Port Forward" by vagrant as part of your VM bootstrap during its creation.
+   - Tag the Docker image:
+
+            docker tag [Image_ID] [DockerRepoUsername]/[DockerRepoName]:[version]
+
+            For example:
+
+                docker tag c26c58862548 cciturria/apis4gifts:1.0
+
+            Note, if you are unsure about the actual "image_id", you can use "docker images" to gather all images being generated.
+
+            Also notice that you could have tagged your Docker image at the moment of “docker building” by using -t [user/repoName]
+            
 
    - In your host OS, open a browser and go to: **http://localhost:3000** - Test your app. 
     
-   - Once you feel comfortable with the Docker image, push it to Docker Hub. First, login to Docker Hub:
+   - Once you feel comfortable with the Docker image, push it to Docker Hub or OCI-R, so that you can run it easily on Oracle Container Engine for Kubernetes (OKE).
+   
+            Note: I assume that you have already created a repository in your DockerHub or OCI-R, for example: cciturria/apis4harness
+
+            In Vagrant, login to Docker Hub/OCI-R:
 
             docker login
 
                 Enter docker hub username, password and email.
+
+            docker push [DockerRepoUsername]/[DockerRepoName]
+
+                E.g. docker push cciturria/apis4gifts
 
 Deploy APIs 4 Gifts application in Kubernetes
 ------

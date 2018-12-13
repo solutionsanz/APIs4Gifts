@@ -1,5 +1,5 @@
 {
-  "name": "APIs4ATP",
+  "name": "APIs4Gifts",
   "version": "1.0.0",
   "description": "NodeJS microservie that interacts with Oracle Autonomous Transaction Processing DB (ATP)",
   "main": "app.js",
