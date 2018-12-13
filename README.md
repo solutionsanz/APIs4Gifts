@@ -82,7 +82,7 @@ Containerise APIs 4 Gifts Application
 
             docker push [DockerRepoUsername]/[DockerRepoName]
 
-                E.g. docker push cciturria/apis4gifts
+                E.g. docker push cciturria/apis4gifts:1.0
 
 Deploy APIs 4 Gifts application in Kubernetes
 ------
