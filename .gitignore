@@ -21,3 +21,4 @@ npm-debug.log
 setEnv
 temp_*
 *-dpl.yaml
+deploy.sh
