@@ -445,7 +445,7 @@ module.exports = function (app) {
         }
 
         var strQuery = " INTO GAME_PLAYER_INTERACTIONS (GAME_OBJECT_ID,PLAYER_ID,GPI_LAT,GPI_LONG, GPI_DATE, GPI_RESULT)";
-        strQuery += " VALUES (:GAME_OBJECT_ID, :PLAYER_ID, :GPI_LAT, :GPI_LONG, :GPI_DATE, :GPI_RESULT) ";
+        strQuery += " VALUES (:GAME_OBJECT_ID, :PLAYER_ID, :GPI_LAT, :GPI_LONG, sysdate, :GPI_RESULT) ";
 
         var query = "INSERT ALL";
         var params = [];
@@ -458,7 +458,7 @@ module.exports = function (app) {
             query = query.replace(/:PLAYER_ID/g, gpis[x].gpid);
             query = query.replace(/:GPI_LAT/g, gpis[x].gpiLat);
             query = query.replace(/:GPI_LONG/g, gpis[x].gpiLong);
-            query = query.replace(/:GPI_DATE/g, "'" + gpis[x].gpiDate + "'");
+            // query = query.replace(/:GPI_DATE/g, "'" + gpis[x].gpiDate + "'");
             query = query.replace(/:GPI_RESULT/g, "'" + gpis[x].gpiResult + "'");
         }
 

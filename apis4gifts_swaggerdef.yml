@@ -254,13 +254,13 @@ paths:
                   gpid: 54321
                   gpiLat: -37.835311
                   gpiLong: 144.9725336
-                  gpiDate: 18-DEC-2018
+                  gpiDate: 2018-12-21T00:00:00.000Z
                   gpiResult: Accepted
                 - goid: 12346
                   gpid: 54322
                   gpiLat: -37.835311
                   gpiLong: 144.9725336
-                  gpiDate: 18-DEC-2018
+                  gpiDate: 2018-12-21T00:00:00.000Z
                   gpiResult: Accepted
               
     post:
@@ -300,13 +300,13 @@ paths:
                   gpid: 54321
                   gpiLat: -37.835311
                   gpiLong: 144.9725336
-                  gpiDate: 18-DEC-2018
+                  gpiDate: "2018-12-21T00:00:00.000Z"
                   gpiResult: Accepted
                 - goid: 12346
                   gpid: 54322
                   gpiLat: -37.835311
                   gpiLong: 144.9725336
-                  gpiDate: 18-DEC-2018
+                  gpiDate: "2018-12-21T00:00:00.000Z"
                   gpiResult: Accepted
 
 
@@ -395,7 +395,6 @@ definitions:
     - "gpid"
     - "gpiLat"
     - "gpiLong"
-    - "gpiDate"
     - "gpiResult"
     properties:
       goid:
@@ -410,9 +409,6 @@ definitions:
       gpiLong:
         type: "number"
         example: 144.9725336
-      gpiDate:
-        type: "string"
-        example: "18-DEC-2018"
       gpiResult:
         type: "string"
         example: "Acepted"
@@ -441,7 +437,7 @@ definitions:
         example: 144.9725336
       gpiDate:
         type: "string"
-        example: "18-DEC-2018"
+        example: "2018-12-21T00:00:00.000Z"
       gpiResult:
         type: "string"
         example: "Acepted"
