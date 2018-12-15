@@ -24,6 +24,12 @@ spec:
       - name: apis4gifts
         image: ENTER_IMAGE_TAG_NAME_HERE
         env:
+        - name: API_GW_ENABLED
+          value: "true"
+        - name: API_GW_SERVER
+          value: "lbaas.oracleau.cloud"
+        - name: API_GW_BASEURL
+          value: "/apis4gifts"
         - name: NODE_ORACLEDB_USER
           value: "[Enter ATP Gifts DB username, e.g. gifts_admin]"
         - name: NODE_ORACLEDB_PASSWORD
