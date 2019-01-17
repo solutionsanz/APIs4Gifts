@@ -309,7 +309,41 @@ paths:
                   gpiDate: "2018-12-21T00:00:00.000Z"
                   gpiResult: Accepted
 
-
+  /gpis/{gpis_id}:
+    put:
+      tags:
+      - "GamePlayerInteractions"
+      summary: "Update record information from this instance."
+      description: "Returns updated value."
+      operationId: "putGamePlayerInteractionsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "gpis_id"
+        in: "path"
+        description: "Record id to filtewr on"
+        required: true
+        type: "string"
+        x-example: '12345'
+      - in: "body"
+        name: "body"
+        description: "Full details of record to be updated with."
+        required: true
+        schema:
+          properties:
+            GamePlayerInteraction:
+              $ref: "#/definitions/GamePlayerInteractionsRequest"
+      responses:
+        200:
+          description: "Returns acknowledgment message."
+          schema:
+            properties:
+              GamePlayerInteraction:
+                $ref: '#/definitions/GamePlayerInteractionsRequest'  
+            
+            
 securityDefinitions:
   X-MyAPI-Key:
     type: "apiKey"

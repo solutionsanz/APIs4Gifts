@@ -454,7 +454,7 @@ module.exports = function (app) {
 
             query = query + strQuery;
 
-            query = query.replace(/:GAME_OBJECT_ID/g, + gpis[x].goid);
+            query = query.replace(/:GAME_OBJECT_ID/g, +gpis[x].goid);
             query = query.replace(/:PLAYER_ID/g, gpis[x].gpid);
             query = query.replace(/:GPI_LAT/g, gpis[x].gpiLat);
             query = query.replace(/:GPI_LONG/g, gpis[x].gpiLong);
@@ -477,77 +477,42 @@ module.exports = function (app) {
     });
 
 
-
-    /* PUT Order status */
-    // app.put('/orders/:id/status', function (req, res) {
-
-    // var token = req.get("token");
-
-    // console.log("Token received is [" + token + "]");
-
-    // if (token == null || token == undefined || token != "valid") {
-
-    //     log("PUT", "/orders/:id/status", "Invalid Token. Verify and try again.");
-    //     res.status(400).end("Invalid Token. Verify and try again."); //Bad request...
-    //     return;
-    // }
-
-    // // Retrieve Order Id and Status from Path and Body respectively:     
-    // var orderId = req.params.id;
-    // var orderStatus = req.body.Order.Status;
+    /* PUT /gpis */
+    app.put('/gpis/:gpisId', function (req, res) {
 
 
-    // console.log("order Id [" + orderId + "], order status is [" + orderStatus + "]");
+        // Retrieving Records to be inserted from path and Body:
+        var gpisId = req.params.gpisId;
+        var gpis = req.body.GamePlayerInteraction;
 
-    // if (orderId == null || orderId == undefined || orderStatus == null ||
-    //     orderStatus == undefined) {
+        if (gpis == null || gpis == undefined || gpisId == null || gpisId == undefined) {
+            log("PUT", "/gpis/:gpisId", "gpis_id or no payload data received... Please verify and try again.");
+            res.status(400).end("gpis_id or no payload data received... Please verify and try again."); //Bad request...
+            return;
+        }
 
-    //     log("PUT", "/orders/:id/status", "Invalid or empty order Id or status. Verify and try again.");
-    //     res.status(400).end("Invalid or empty order Id or status. Verify and try again."); //Bad request...
-    //     return;
-    // }
+        // Setting variables:
+        var GPI_ID = gpisId;
+        var GAME_OBJECT_ID = gpis.goid;
+        var PLAYER_ID = gpis.gpid;
+        var GPI_LAT = gpis.gpiLat;
+        var GPI_LONG = gpis.gpiLong;
+        var GPI_RESULT = gpis.gpiResult;
 
-    // var DB_COLLECTION_NAME = "orders";
+        var query = "UPDATE GAME_PLAYER_INTERACTIONS SET GAME_OBJECT_ID = :GAME_OBJECT_ID, PLAYER_ID = :PLAYER_ID, GPI_LAT = :GPI_LAT, GPI_LONG = :GPI_LONG, GPI_RESULT = :GPI_RESULT WHERE GPI_ID = :GPI_ID";
 
-    // // Set our internal DB variable
-    // var db = req.db;
+        var params = [GAME_OBJECT_ID, PLAYER_ID, GPI_LAT, GPI_LONG, GPI_RESULT, GPI_ID];
 
-    // // Set collection
-    // log("PUT", "/orders/:id/status", "DB_COLLECTION_NAME [" + DB_COLLECTION_NAME + "]");
-    // var collection = db.get(DB_COLLECTION_NAME);
-
-    // // Adding ClosingDate and Time in ISO format: "yyyy-MM-ddTHH:mm:ss"
-    // var closingDateTime = new Date().toISOString().replace(/\..+/, '');
+        log("PUT", "/gpis/:gpisId", "Params are [" + JSON.stringify(params) + "]");
 
 
-    // log("PUT", "/orders/:id/status", "Updating Order [" + orderId + "], with status [" + orderStatus + "] at [" + closingDateTime + "]");
+        funct.insertDataGeneric(query, params, function () {
 
-    // // Insert row to MongoDB
-    // collection.update({
-    //     "_id": orderId
-    // }, {
-    //     $set: {
-    //         "Status": orderStatus,
-    //         "ClosingDate": closingDateTime
-    //     }
-    // }, function (err, docs) {
-    //     if (err) {
-    //         log("PUT", "/orders/:id/status", "Oops, something wrong just happened.");
-    //         res.send({
-    //             Message: 'Oops, something wrong just happened. Please veify log files to determine cause.'
-    //         });
-    //     } else {
-
-    //         // It all worked! Let's return successful answer.
-    //         log("PUT", "/orders/:id/status", "Order status was updates successfully...");
-
-    //         // Returning result
-    //         res.send({
-    //             "_id": orderId
-    //         });
-
-    //     }
-    // });
-    // });
+            // Echoing result... node-oradb does not return the id, so let's temporarily return the incoming list of orders
+            res.send({
+                "GamePlayerInteraction": gpis
+            });
+        });
+    });
 
 };
