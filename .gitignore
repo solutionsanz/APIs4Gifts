@@ -22,5 +22,6 @@ setEnv
 temp_*
 *-dpl.yaml
 deploy.sh
+undeploy.sh
 
 dbconfig.js
