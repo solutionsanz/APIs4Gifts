@@ -21,6 +21,7 @@ npm-debug.log
 setEnv
 temp_*
 *-dpl.yaml
+*-pvc.yaml
 deploy.sh
 undeploy.sh
 
