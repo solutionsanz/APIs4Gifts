@@ -26,5 +26,4 @@ undeploy.sh
 
 dbconfig.js
 
-*-pvc.yaml
-*-dpl.yaml
+apis4gifts-pvc.yaml
