@@ -25,3 +25,6 @@ deploy.sh
 undeploy.sh
 
 dbconfig.js
+
+*-pvc.yaml
+*-dpl.yaml
