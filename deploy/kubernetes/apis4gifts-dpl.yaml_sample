@@ -48,4 +48,4 @@ spec:
       volumes:
         - name: oke-autdb-persistent-storage
           persistentVolumeClaim:
-            claimName: fort_oke_autdbpvc
+            claimName: oke_autdbpvc
