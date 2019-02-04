@@ -29,7 +29,7 @@
 
     sudo apt-get update
 
-    sudo apt-get install docker-ce -y
+    sudo apt-get install docker-ce -y --force-yes
 
     #echo "############################################################################################################"
     #echo "########### Installing and Configuring Node-Oracledb with Oracle DB Instant Client ##############################"
