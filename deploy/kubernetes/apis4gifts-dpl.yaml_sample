@@ -44,7 +44,7 @@ spec:
           - name: oke-autdb-persistent-storage
             mountPath: /var/lib/cri
       imagePullSecrets:
-      - name: dhreg
+      - name: ocir-reg
       volumes:
         - name: oke-autdb-persistent-storage
           persistentVolumeClaim:
